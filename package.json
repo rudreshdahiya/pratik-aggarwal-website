@@ -7,7 +7,6 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "packageManager": "yarn@4.5.2",
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",

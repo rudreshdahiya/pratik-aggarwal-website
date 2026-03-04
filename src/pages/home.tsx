@@ -26,8 +26,8 @@ export default function Home() {
             <p className="font-mono text-sm">
               git clone https://github.com/growthxai/squeaks.git my-prototype
             </p>
-            <p className="font-mono text-sm">cd my-prototype && yarn install</p>
-            <p className="font-mono text-sm">yarn dev</p>
+            <p className="font-mono text-sm">cd my-prototype && npm install</p>
+            <p className="font-mono text-sm">npm run dev</p>
           </CardContent>
         </Card>
       </div>

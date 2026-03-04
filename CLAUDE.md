@@ -87,11 +87,11 @@ Accordion, Alert, AlertDialog, AspectRatio, Avatar, Badge, Breadcrumb, Button, C
 
 ## Package manager
 
-Use `yarn` (not npm).
+Use `npm`.
 
 ## Dev server
 
 ```bash
-yarn dev     # Start at http://localhost:5173
-yarn build   # Production build
+npm run dev     # Start at http://localhost:5173
+npm run build   # Production build
 ```

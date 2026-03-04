@@ -27,10 +27,10 @@ git clone https://github.com/growthxai/squeaks.git my-prototype
 cd my-prototype
 
 # Install dependencies
-yarn install
+npm install
 
 # Start the dev server
-yarn dev
+npm run dev
 ```
 
 Open http://localhost:5173 and start prompting Claude.
