@@ -1,97 +1,195 @@
-# Squeaks — Claude Code Guide
+# CLAUDE.md
 
-## What this project is
+# Project Context
 
-A lo-fi prototyping tool. Users describe ideas (plain text, ASCII wireframes, screenshots) and you turn them into navigable wireframe pages. Think napkin sketches in the browser — not production UI.
+This repository contains the personal brand website for Pratik Aggarwal.
 
-**The goal is speed and clarity, not polish.**
+Pratik is a disability inclusion expert, public speaker, researcher, and Director at ASTHA. He also founded Blooming in Pain, a storytelling platform for people living with invisible disabilities.
 
-## Stack
+The website serves two primary audiences:
 
-Vite + React 19 + TypeScript + React Router + Tailwind CSS v4 + Shadcn UI
+1. Decision-makers looking to hire, partner, invite, or collaborate with Pratik.
+2. Community members looking to connect with Blooming in Pain and share their stories.
 
-No backend. No database. No API calls. Everything is frontend-only with static placeholder data.
+The website should balance emotional storytelling with professional credibility.
 
-## Core rules
+---
 
-- **Monochrome only** — black, white, and grays. No colors unless the user explicitly asks
-- **Comic Neue font** — don't change it. It signals "this is a mockup"
-- **Use Shadcn UI components** from `@/components/ui/` — don't install new UI libraries
-- **Don't modify `src/components/ui/`** — these are Shadcn defaults
-- **Placeholder data only** — use realistic fake data (names, numbers, dates), not "Lorem ipsum"
-- **No real functionality** — no API calls, no auth, no databases, no localStorage persistence
-- **No animations** — transitions and animations are disabled globally in CSS
-- **Keep it simple** — flat components, minimal abstraction, no over-engineering
+# Primary Goal
 
-## File conventions
+Generate qualified inquiries from:
 
-- **kebab-case** for all filenames: `project-dashboard.tsx`, not `ProjectDashboard.tsx`
-- **Pages** go in `src/pages/` (or `src/pages/v1/`, `src/pages/v2/` for versions)
-- **Routes** are defined in `src/main.tsx`
-- **Shared components** (non-Shadcn) go in `src/components/`
-- **Layout and nav** live in `src/layout.tsx`
-- Use `@/` import alias for all project imports
+* Corporates
+* NGOs
+* Government organizations
+* Multilateral organizations
+* Educational institutions
 
-## Routing
+Success metric:
 
-Use React Router (`react-router`). All routing is client-side.
+* Partnership inquiries
+* Speaking invitations
+* Consulting opportunities
 
-**When adding a new page, always:**
+---
 
-1. Create the page component in `src/pages/`
-2. Add the route in `src/main.tsx`
-3. Add a nav link in `src/layout.tsx` if it's a top-level page
+# Secondary Goals
 
-**Version pattern** — users often want to compare approaches:
+* Grow the Blooming in Pain community
+* Increase story submissions
+* Increase Instagram and Medium engagement
+* Strengthen Pratik's positioning as a disability inclusion thought leader
 
-```
-/v1/dashboard    ← version 1
-/v2/dashboard    ← version 2 with different layout
-```
+---
 
-Organize versioned pages in matching folders:
+# Brand Positioning
 
-```
-src/pages/
-├── v1/
-│   └── dashboard.tsx
-└── v2/
-    └── dashboard.tsx
-```
+Pratik turns lived experience of invisible disability into change through stories that make people believed and institutions more inclusive.
 
-## When the user shares a wireframe or idea
+Core themes:
 
-1. Create the page component in `src/pages/`
-2. Add the route to `src/main.tsx`
-3. Build the layout using Shadcn components (Card, Table, Button, Input, Tabs, etc.)
-4. Use realistic placeholder text and data — real-sounding names, plausible numbers
-5. Prioritize layout structure and information hierarchy over detail
-6. Make interactive elements look clickable but they don't need to do anything
-7. If the wireframe implies navigation between pages, create all the pages and link them
+* Dignity over pity
+* Lived authority
+* Inclusion
+* Accessibility
+* Community
+* Storytelling
+* Quiet strength
 
-## What NOT to do
+Avoid:
 
-- Don't add colors, gradients, brand colors, or themes
-- Don't install new npm packages unless absolutely necessary
-- Don't build real functionality (forms that submit, data that persists, APIs)
-- Don't create abstractions for one-off pages — copy-paste is fine for prototypes
-- Don't add loading states, error boundaries, or edge case handling
-- Don't add comments explaining obvious layout code
-- Don't refactor or "clean up" prototype pages unless asked
+* Inspiration-porn
+* Charity framing
+* Pity-based language
+* Corporate jargon
 
-## Available Shadcn components
+---
 
-All standard Shadcn UI components are installed and available at `@/components/ui/`:
+# Design System
 
-Accordion, Alert, AlertDialog, AspectRatio, Avatar, Badge, Breadcrumb, Button, Calendar, Card, Carousel, Chart, Checkbox, Collapsible, Command, ContextMenu, Dialog, Drawer, DropdownMenu, Form, HoverCard, Input, InputOTP, Label, Menubar, NavigationMenu, Pagination, Popover, Progress, RadioGroup, Resizable, ScrollArea, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Sonner, Switch, Table, Tabs, Textarea, Toast, Toggle, ToggleGroup, Tooltip
+Color Palette
 
-## Package manager
+* Ink Navy: #1B3A5B
+* Healing Teal: #2E8B8B
+* Invisible Plum: #6E4C7E
+* Warm Sand: #F7F3EC
+* Soft Cloud: #FFFFFF
+* Quiet Grey: #5A6472
 
-Use `npm`.
+Typography
 
-## Dev server
+* Headings: Fraunces
+* Body: Atkinson Hyperlegible
 
-```bash
-npm run dev     # Start at http://localhost:5173
-npm run build   # Production build
-```
+Design Principles
+
+* Calm
+* Minimal
+* Spacious
+* Accessible
+* Human
+
+The website should feel trustworthy, warm, and thoughtful.
+
+---
+
+# Accessibility Requirements
+
+WCAG 2.1 AA compliance is mandatory.
+
+Always maintain:
+
+* Semantic HTML
+* Keyboard navigation
+* Focus states
+* Accessible forms
+* Proper heading hierarchy
+* Alt text
+* Sufficient contrast
+* Reduced motion support
+
+Accessibility is a launch blocker.
+
+---
+
+# Site Architecture
+
+Pages
+
+* Home
+* About
+* Services
+* Work & Engagements
+* Blooming in Pain
+* Contact
+* Accessibility Statement
+
+Navigation should remain simple and low cognitive load.
+
+---
+
+# CTA Hierarchy
+
+Primary CTA
+
+* Work With Me
+* Partner With Me
+* Book a Talk
+
+Secondary CTA
+
+* Join the Community
+* Read Stories
+
+The website should prioritize inquiry generation while still supporting community engagement.
+
+---
+
+# Technical Stack
+
+Current Stack
+
+* React
+* TypeScript
+* Vite
+* React Router
+* Tailwind CSS
+* Shadcn UI
+
+Deployment
+
+* Vercel
+
+Forms
+
+* Formspree or Tally
+
+Analytics
+
+* Vercel Analytics
+
+---
+
+# Working Rules For Claude
+
+Before making changes:
+
+1. Read CHANGELOG.md
+2. Read TODO.md
+3. Review affected pages
+
+When completing meaningful work:
+
+1. Update CHANGELOG.md
+2. Update TODO.md
+3. Document architectural decisions
+
+Do not introduce features outside the approved PRD without justification.
+
+Always prioritize:
+
+1. Accessibility
+2. Clarity
+3. Conversion
+4. Performance
+5. Maintainability
