@@ -103,6 +103,20 @@ Status: Complete
 
 ---
 
+## Home Page Design
+
+Status: Complete (phase 1 — portrait photo pending)
+
+* [x] Curiosity-first hero tagline
+* [x] Role label above name
+* [x] Pull quote section (Ink Navy) replacing 3-paragraph story
+* [x] Offering cards stripped to title + single-line outcome
+* [x] Engagement descriptions removed — clean event/org/year list
+* [x] Blooming in Pain description sharpened
+* [ ] Add Pratik's portrait photo to hero (replace placeholder div)
+
+---
+
 ## Launch Checklist
 
 * [x] Contact page complete
@@ -114,6 +128,6 @@ Status: Complete
 * [x] Wire Formspree endpoint on contact form + story submission form — copy `.env.example` to `.env.local` and fill in real form IDs before deploying
 * [ ] Create OG image (1200×630px → public/og-image.jpg)
 * [ ] Confirm domain → update SITE_URL in page-meta.tsx + index.html
-* [ ] Production build passes (npm run build)
-* [ ] Deploy to Vercel
+* [x] Production build passes (npm run build)
+* [x] Deploy to Vercel — https://pratik-aggarwal-website.vercel.app/
 * [ ] Final QA review

@@ -27,6 +27,16 @@ function PullQuote({
   );
 }
 
+// ── Section label ─────────────────────────────────────────────────────────────
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-8">
+      {children}
+    </p>
+  );
+}
+
 // ── Reusable portrait placeholder ─────────────────────────────────────────────
 
 function Portrait({
@@ -164,11 +174,13 @@ export default function About() {
       </header>
 
       {/* ── Body ──────────────────────────────────────────────────────── */}
-      <div className="px-6 py-16">
+      <div className="px-6 py-20">
         <div className="max-w-[70ch] mx-auto">
 
-          {/* ── 1. Lead: living with fibromyalgia ─────────────────────── */}
+          {/* ── 1. The body ───────────────────────────────────────────── */}
           <section aria-label="Living with persistent pain">
+            <SectionLabel>01 — The body</SectionLabel>
+
             <div className="space-y-6 text-lg text-foreground leading-relaxed">
               <p>
                 There are two kinds of medical appointments I've learned to
@@ -192,17 +204,7 @@ export default function About() {
                 form, every sceptical colleague, every well-meaning family
                 member required a fresh round of justification. Pain, it turns
                 out, is socially acceptable primarily when it is legible — when
-                it can be photographed, graphed, categorised. Mine wasn't. And
-                that meant it often felt, in a very real and grinding sense,
-                like it wasn't permitted to exist.
-              </p>
-              <p>
-                There is a particular loneliness in invisible illness. It isn't
-                just the pain itself. It's the performance of wellness you learn
-                to maintain around it — at work, in relationships, in the
-                doctor's office — because to stop performing is to invite
-                doubt. And doubt, when you're already in pain, is its own
-                kind of damage.
+                it can be photographed, graphed, categorised. Mine wasn't.
               </p>
             </div>
 
@@ -218,8 +220,10 @@ export default function About() {
             aspectRatio="16/9"
           />
 
-          {/* ── 2. The turn: from survival to advocacy ─────────────────── */}
+          {/* ── 2. The turn ───────────────────────────────────────────── */}
           <section aria-label="How lived experience became advocacy">
+            <SectionLabel>02 — The turn</SectionLabel>
+
             <div className="space-y-6 text-lg text-foreground leading-relaxed">
               <p>
                 At some point — and I couldn't tell you the exact date, because
@@ -236,23 +240,15 @@ export default function About() {
                 careful attention to what is actually there.
               </p>
               <p>
-                I started writing. At first because I needed to process what
-                was happening to me, then because I kept encountering people
-                with invisible disabilities who were in the same place I'd been
-                — isolated, doubted, exhausted, and unable to find stories that
-                reflected their reality without either dramatising it or
-                sanitising it into something more palatable.
-              </p>
-              <p>
-                Blooming in Pain began as a question I couldn't stop asking:
-                where were the stories for people like us? Not the triumphant
-                overcoming narratives where suffering is the price of
-                enlightenment. Not the tragedy arcs. Just honest accounts of
-                what it's like to live — fully, imperfectly, sometimes in
-                significant pain — in a world that finds that kind of complexity
-                inconvenient. I couldn't find them. So I started building the
-                space where they could exist, and where the people who needed
-                them would be believed.
+                I started writing — first to make sense of what was happening
+                to me, then because I kept meeting people with invisible
+                disabilities in the same position I'd been: isolated, doubted,
+                and unable to find stories that reflected their experience
+                without dramatising it or sanitising it into something more
+                palatable. The triumphant overcoming arcs existed in abundance.
+                What didn't were honest accounts of living — fully, imperfectly,
+                sometimes in significant pain — in a world that finds that
+                complexity inconvenient.
               </p>
             </div>
 
@@ -263,13 +259,11 @@ export default function About() {
             </PullQuote>
           </section>
 
-          {/* ── 3. The work: professional path ─────────────────────────── */}
+          {/* ── 3. The work ───────────────────────────────────────────── */}
           <section aria-label="Professional work in disability inclusion">
+            <SectionLabel>03 — The work</SectionLabel>
+
             <div className="space-y-6 text-lg text-foreground leading-relaxed">
-              <p>
-                Before the writing, and running alongside it, there was the
-                field work.
-              </p>
               <p>
                 For eight years, I worked alongside children with disabilities
                 in Delhi's urban slums through ASTHA, the organisation I now
@@ -281,23 +275,22 @@ export default function About() {
                 and no system prepared to find out.
               </p>
               <p>
-                You cannot work with disability in that context without
-                understanding how it weaves together with poverty, with
-                homelessness, with access to healthcare that barely reaches the
-                families who need it most, with gender in all the ways gender
-                shapes what kind of help a person is considered worth giving. A
-                girl with a learning disability in a family without stable
-                housing has needs that no single framework covers. That is where
-                I learned to think in intersections — to resist the clean
-                category, to stay with the complexity.
-              </p>
-              <p>
-                Those years also gave me something that no amount of training
-                can fully replicate: an unromanticised understanding of what it
-                costs to be disabled in a world not built for you, and a deep,
-                settled impatience with inclusion that stays comfortable.
+                You cannot work in that context without understanding how
+                disability weaves into poverty, homelessness, healthcare access,
+                and gender — all at once, not in sequence. There is no clean
+                framework that holds it. That is where I learned to think in
+                intersections: to resist the tidy category, to stay with
+                complexity, and to distrust inclusion that doesn't reach the
+                people most difficult to reach.
               </p>
             </div>
+
+            <PullQuote accent="teal">
+              "Those years gave me something training cannot replicate — an
+              unromanticised understanding of what it costs to be disabled
+              in a world not built for you, and a deep, settled impatience
+              with inclusion that stays comfortable."
+            </PullQuote>
           </section>
 
           <Portrait
@@ -307,9 +300,9 @@ export default function About() {
             size="contained"
           />
 
-          {/* ── 4. Credibility (understated) ──────────────────────────── */}
+          {/* ── 4. Credibility ────────────────────────────────────────── */}
           <section aria-label="Roles, publications, and affiliations">
-            <div className="border-t border-b border-border py-9 my-12">
+            <div className="border-t border-b border-border py-9 my-4">
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
                 Roles &amp; publications
               </p>
@@ -352,26 +345,28 @@ export default function About() {
             </div>
           </section>
 
-          {/* ── 5. Soft CTA ───────────────────────────────────────────── */}
-          <section aria-label="Read more or work together">
-            <p className="text-lg text-muted-foreground mb-9 max-w-[58ch] leading-relaxed">
-              If any of this resonates — whether you live with an invisible
-              disability, work in inclusion, or simply want to understand the
-              experience better — there's a place for you here.
+          {/* ── 5. CTA ────────────────────────────────────────────────── */}
+          <section aria-label="Work together or read stories" className="pt-6">
+            <p className="text-lg text-muted-foreground mb-9 max-w-[54ch] leading-relaxed">
+              There are two ways to be here. If you're looking for a collaborator
+              or speaker — someone who brings lived experience alongside
+              institutional expertise — the services page is the right next step.
+              If you recognise something in this story, Blooming in Pain was
+              built for you.
             </p>
             <div className="flex flex-wrap items-center gap-5">
-              <Link
-                to="/blooming-in-pain"
-                className="inline-flex items-center px-7 py-3.5 rounded-md font-semibold text-base text-white hover:opacity-90 transition-opacity"
-                style={{ backgroundColor: "#6E4C7E" }}
-              >
-                Read more stories
-              </Link>
               <Link
                 to="/services"
                 className="inline-flex items-center px-7 py-3.5 rounded-md bg-primary text-primary-foreground font-semibold text-base hover:bg-primary/90 transition-colors"
               >
                 Work with me
+              </Link>
+              <Link
+                to="/blooming-in-pain"
+                className="inline-flex items-center px-7 py-3.5 rounded-md font-semibold text-base text-white hover:opacity-90 transition-opacity"
+                style={{ backgroundColor: "#6E4C7E" }}
+              >
+                Read stories
               </Link>
             </div>
           </section>
