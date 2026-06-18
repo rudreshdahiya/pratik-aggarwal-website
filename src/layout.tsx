@@ -157,7 +157,7 @@ export function Layout() {
               .
             </p>
             <a
-              href="https://astha.org.in"
+              href="https://asthaindia.in"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-foreground underline underline-offset-4 hover:text-primary transition-colors"
@@ -210,7 +210,7 @@ export function Layout() {
               </li>
               <li>
                 <a
-                  href="https://instagram.com/bloominginpain"
+                  href="https://instagram.com/blooming.in.pain"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-foreground underline underline-offset-4 hover:text-primary transition-colors"

@@ -338,13 +338,13 @@ export default function Work() {
 
               {/* Section heading */}
               <div className="mb-10 md:mb-12">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
-                  {group.category}
-                </p>
-                <p
+                <h2
                   id={`${group.id}-heading`}
-                  className="text-base text-muted-foreground max-w-[52ch] leading-relaxed"
+                  className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3"
                 >
+                  {group.category}
+                </h2>
+                <p className="text-base text-muted-foreground max-w-[52ch] leading-relaxed">
                   {group.intro}
                 </p>
               </div>

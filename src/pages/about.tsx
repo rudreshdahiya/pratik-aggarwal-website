@@ -135,7 +135,7 @@ export default function About() {
           "address": { "@type": "PostalAddress", "addressLocality": "New Delhi", "addressCountry": "IN" },
           "sameAs": [
             "https://linkedin.com/in/pratikaggarwal",
-            "https://instagram.com/bloominginpain",
+            "https://instagram.com/blooming.in.pain",
             "https://medium.com/@BloomingInPain",
             "https://asthaindia.in"
           ]

@@ -270,7 +270,7 @@ export default function Contact() {
                 <ul className="space-y-2.5 list-none m-0 p-0">
                   <li>
                     <a
-                      href="https://instagram.com/bloominginpain"
+                      href="https://instagram.com/blooming.in.pain"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-base text-foreground underline underline-offset-4 hover:text-primary transition-colors"

@@ -144,7 +144,7 @@ export default function Home() {
           },
           "sameAs": [
             "https://linkedin.com/in/pratikaggarwal",
-            "https://instagram.com/bloominginpain",
+            "https://instagram.com/blooming.in.pain",
             "https://medium.com/@BloomingInPain",
             "https://asthaindia.in"
           ]
@@ -436,7 +436,7 @@ export default function Home() {
 
           <div className="flex flex-wrap gap-6 items-center">
             <a
-              href="https://instagram.com/bloominginpain"
+              href="https://instagram.com/blooming.in.pain"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground underline underline-offset-4 hover:text-primary transition-colors"
