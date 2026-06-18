@@ -23,22 +23,26 @@ const logos = [
 const offerings = [
   {
     title: "Corporate Sensitization",
-    outcome: "Real understanding — not training slides.",
+    outcome:
+      "Your teams understand invisible disability — not from a training slide, but from lived experience.",
     href: "/services#corporate",
   },
   {
     title: "NGO Capacity Building",
-    outcome: "Frameworks to include those most often excluded.",
+    outcome:
+      "Your organisation gains the frameworks and confidence to include people with invisible disabilities meaningfully.",
     href: "/services#ngo",
   },
   {
     title: "Academic & Public Talks",
-    outcome: "Changed understanding that lasts beyond the room.",
+    outcome:
+      "Your audience leaves with a changed understanding of disability that they carry into their work and lives.",
     href: "/services#talks",
   },
   {
     title: "Government & Multilateral Advisory",
-    outcome: "Policy that reflects invisible reality, not just documented cases.",
+    outcome:
+      "Your policies reflect the reality of invisible disability — not just the visible, documented cases.",
     href: "/services#advisory",
   },
 ];
@@ -65,21 +69,29 @@ const engagements = [
   {
     event: "Purple Fest Goa",
     org: "Goa Tourism & Disability Rights Coalition",
+    description:
+      "Keynote on invisible disability and cultural inclusion at India's largest disability arts festival.",
     year: "2023",
   },
   {
     event: "UNICEF Bihar",
     org: "UNICEF India",
+    description:
+      "Capacity-building workshop for district-level officers on disability-inclusive child rights programming.",
     year: "2023",
   },
   {
     event: "NDMA + UN India",
     org: "National Disaster Management Authority",
+    description:
+      "Advisory input on disability-inclusive disaster risk reduction frameworks at the national level.",
     year: "2022",
   },
   {
     event: "HCL Foundation Summit",
     org: "HCL Foundation",
+    description:
+      "Panel discussion on moving corporate disability inclusion from policy to culture.",
     year: "2022",
   },
 ];
@@ -144,39 +156,31 @@ export default function Home() {
           },
           "sameAs": [
             "https://linkedin.com/in/pratikaggarwal",
-            "https://instagram.com/blooming.in.pain",
+            "https://instagram.com/bloominginpain",
             "https://medium.com/@BloomingInPain",
             "https://asthaindia.in"
           ]
         }
       ]} />
-
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* 1. HERO                                                             */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      <section aria-labelledby="hero-heading" className="px-6 py-24 md:py-32">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_300px] gap-14 items-center">
+      <section aria-labelledby="hero-heading" className="px-6 py-20 md:py-28">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_320px] gap-14 items-center">
 
           {/* Text */}
           <div>
-            <p
-              className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6"
-              aria-hidden="true"
-            >
-              Disability inclusion · Speaker · Researcher · Director, ASTHA
-            </p>
-
             <h1
               id="hero-heading"
-              className="text-5xl md:text-6xl lg:text-7xl text-foreground mb-7 tracking-tight"
+              className="text-5xl md:text-6xl lg:text-7xl text-foreground mb-5 tracking-tight"
               style={{ fontFamily: "'Fraunces', Georgia, serif", lineHeight: 1.05 }}
             >
               Pratik<br />Aggarwal
             </h1>
 
-            <p className="text-lg md:text-xl text-foreground mb-10 max-w-[40ch] leading-relaxed">
-              The pain no one can see is often the pain institutions miss most.
-              I know this firsthand — and have spent nine years helping change it.
+            <p className="text-lg md:text-xl text-foreground mb-10 max-w-[42ch] leading-relaxed">
+              Disability inclusion expert. I turn lived experience into real
+              inclusion.
             </p>
 
             <div className="flex flex-wrap items-center gap-5">
@@ -196,7 +200,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Portrait — replace with <img> when photo is available */}
+          {/* Portrait — replace <div> with <img> when photo is available */}
           <div
             className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden order-first md:order-last"
             role="img"
@@ -210,6 +214,7 @@ export default function Home() {
               }}
               aria-hidden="true"
             />
+            {/* Monogram placeholder */}
             <span
               className="absolute inset-0 flex items-center justify-center text-8xl font-light select-none"
               style={{
@@ -238,6 +243,7 @@ export default function Home() {
       <section aria-label="Experience and selected partners" className="px-6 py-16">
         <div className="max-w-5xl mx-auto">
 
+          {/* Stats */}
           <div
             className="grid grid-cols-3 gap-6 md:gap-16 pb-12 border-b border-border"
             role="list"
@@ -258,6 +264,7 @@ export default function Home() {
             ))}
           </div>
 
+          {/* Logo row */}
           <div className="pt-10">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
               Selected partners &amp; collaborators
@@ -269,6 +276,7 @@ export default function Home() {
             >
               {logos.map((name) => (
                 <li key={name}>
+                  {/* Replace with <img src="…" alt={`${name} logo`} …> when assets are available */}
                   <span
                     className="text-sm font-bold tracking-wider uppercase"
                     style={{ color: "#5A6472", opacity: 0.5 }}
@@ -282,65 +290,70 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="border-t border-border" aria-hidden="true" />
+
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* 3. PULL QUOTE                                                       */}
+      {/* 3. STORY (condensed)                                                */}
       {/* ─────────────────────────────────────────────────────────────────── */}
-      <section
-        aria-labelledby="story-heading"
-        className="px-6 py-24 md:py-32"
-        style={{ backgroundColor: "#1B3A5B" }}
-      >
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 id="story-heading" className="sr-only">About Pratik</h2>
-          <blockquote
-            className="text-2xl md:text-3xl lg:text-[2.25rem] italic leading-snug mb-8"
-            style={{
-              fontFamily: "'Fraunces', Georgia, serif",
-              color: "#FFFFFF",
-              lineHeight: 1.3,
-            }}
+      <section aria-labelledby="story-heading" className="px-6 py-20">
+        <div className="max-w-[70ch] mx-auto">
+          <h2
+            id="story-heading"
+            className="text-3xl md:text-4xl text-foreground mb-7"
           >
-            "I have fibromyalgia. I've also spent nine years inside the
-            institutions meant to address it. Those two facts are the same story."
-          </blockquote>
-          <p
-            className="text-base mb-10 max-w-[46ch] mx-auto leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.6)" }}
-          >
-            My work sits at the intersection of lived experience and
-            institutional change — because real inclusion can't come from one
-            without the other.
-          </p>
+            A little about me
+          </h2>
+
+          <div className="space-y-5 text-lg text-foreground leading-relaxed">
+            <p>
+              I have fibromyalgia — a chronic pain condition that's invisible,
+              unpredictable, and largely misunderstood. I also have nine years of
+              experience working with organisations, governments, and communities
+              on disability inclusion.
+            </p>
+            <p>
+              Those two facts aren't separate. The work I do is shaped by what
+              it's actually like to navigate a world that wasn't built for
+              bodies like mine — the exhaustion of having to prove a condition,
+              the particular loneliness of not fitting any obvious category.
+            </p>
+            <p>
+              I believe inclusion that doesn't reach invisible disabilities isn't
+              really inclusion at all. And I've made it my work to change that —
+              one conversation, one policy, one story at a time.
+            </p>
+          </div>
+
           <Link
             to="/about"
-            className="inline-block font-semibold underline underline-offset-4 transition-colors hover:opacity-80"
-            style={{ color: "#5BBFBF" }}
+            className="inline-block mt-8 font-semibold text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
           >
             My full story →
           </Link>
         </div>
       </section>
 
+      <div className="border-t border-border" aria-hidden="true" />
+
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* 4. WHAT I OFFER                                                     */}
       {/* ─────────────────────────────────────────────────────────────────── */}
       <section
         aria-labelledby="offer-heading"
-        className="px-6 py-24"
+        className="px-6 py-20"
         style={{ backgroundColor: "#F2EEE7" }}
       >
         <div className="max-w-5xl mx-auto">
-          <div className="max-w-[52ch] mb-14">
+          <div className="max-w-[60ch] mb-12">
             <h2
               id="offer-heading"
               className="text-3xl md:text-4xl text-foreground mb-3"
-              style={{ fontFamily: "'Fraunces', Georgia, serif" }}
             >
               What I offer
             </h2>
             <p className="text-base text-muted-foreground">
               Each engagement begins with listening — to what your context
-              actually needs.
+              actually needs, not a fixed programme.
             </p>
           </div>
 
@@ -350,14 +363,14 @@ export default function Home() {
                 key={item.title}
                 className="bg-card border-border shadow-none"
               >
-                <CardContent className="p-8 flex flex-col h-full">
+                <CardContent className="p-7 flex flex-col h-full">
                   <h3
-                    className="text-xl text-foreground mb-2"
+                    className="text-xl text-foreground mb-3"
                     style={{ fontFamily: "'Fraunces', Georgia, serif" }}
                   >
                     {item.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground flex-1 mb-7 leading-relaxed">
+                  <p className="text-base text-muted-foreground leading-relaxed flex-1 mb-6">
                     {item.outcome}
                   </p>
                   <Link
@@ -379,12 +392,13 @@ export default function Home() {
       {/* ─────────────────────────────────────────────────────────────────── */}
       <section
         aria-labelledby="bip-heading"
-        className="px-6 py-24"
+        className="px-6 py-20"
         style={{ backgroundColor: "#F8F4FB" }}
       >
         <div className="max-w-5xl mx-auto">
 
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-12">
+          {/* Header row */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-11">
             <div>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-2.5"
@@ -395,19 +409,20 @@ export default function Home() {
               <h2
                 id="bip-heading"
                 className="text-3xl md:text-4xl text-foreground"
-                style={{ fontFamily: "'Fraunces', Georgia, serif" }}
               >
                 Blooming in Pain
               </h2>
             </div>
-            <p className="text-base text-muted-foreground max-w-[42ch] md:text-right leading-relaxed">
-              Where people with invisible disabilities tell it like it actually
-              is — honest, undramatic, and rarely believed.
+            <p className="text-base text-muted-foreground max-w-[44ch] md:text-right">
+              A storytelling platform where people with invisible disabilities
+              share what their lives actually look like — honest, undramatic,
+              human.
             </p>
           </div>
 
+          {/* Story preview cards */}
           <ul
-            className="grid sm:grid-cols-3 gap-4 list-none m-0 p-0 mb-10"
+            className="grid sm:grid-cols-3 gap-4 list-none m-0 p-0 mb-9"
             role="list"
           >
             {storyPreviews.map((story) => (
@@ -434,9 +449,10 @@ export default function Home() {
             ))}
           </ul>
 
+          {/* Links */}
           <div className="flex flex-wrap gap-6 items-center">
             <a
-              href="https://instagram.com/blooming.in.pain"
+              href="https://instagram.com/bloominginpain"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground underline underline-offset-4 hover:text-primary transition-colors"
@@ -462,11 +478,10 @@ export default function Home() {
       {/* ─────────────────────────────────────────────────────────────────── */}
       <section aria-labelledby="engagements-heading" className="px-6 py-20">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-10">
+          <div className="mb-12">
             <h2
               id="engagements-heading"
               className="text-3xl md:text-4xl text-foreground mb-3"
-              style={{ fontFamily: "'Fraunces', Georgia, serif" }}
             >
               Selected engagements
             </h2>
@@ -479,32 +494,33 @@ export default function Home() {
             {engagements.map((eng, i) => (
               <li
                 key={eng.event}
-                className={`flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-8 py-5 ${
+                className={`grid md:grid-cols-[200px_1fr] gap-4 md:gap-10 py-8 ${
                   i > 0 ? "border-t border-border" : ""
                 }`}
               >
-                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-5 min-w-0">
+                <div>
                   <p
-                    className="text-base text-foreground shrink-0"
+                    className="text-xl text-foreground mb-1"
                     style={{ fontFamily: "'Fraunces', Georgia, serif" }}
                   >
                     {eng.event}
                   </p>
-                  <p className="text-sm text-muted-foreground truncate">
-                    {eng.org}
+                  <p className="text-sm text-muted-foreground">{eng.org}</p>
+                  <p
+                    className="text-xs font-semibold uppercase tracking-widest mt-2"
+                    style={{ color: "#1B6B6B" }}
+                  >
+                    {eng.year}
                   </p>
                 </div>
-                <p
-                  className="text-xs font-semibold uppercase tracking-widest shrink-0"
-                  style={{ color: "#1B6B6B" }}
-                >
-                  {eng.year}
+                <p className="text-base text-muted-foreground self-center leading-relaxed">
+                  {eng.description}
                 </p>
               </li>
             ))}
           </ul>
 
-          <div className="border-t border-border pt-7 mt-2">
+          <div className="border-t border-border pt-8 mt-2">
             <Link
               to="/work"
               className="text-sm font-semibold text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
@@ -524,6 +540,7 @@ export default function Home() {
       >
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-4">
 
+          {/* Work with me — Healing Teal */}
           <Link
             to="/services"
             className="group block rounded-2xl p-10 md:p-12 transition-opacity hover:opacity-95"
@@ -545,6 +562,7 @@ export default function Home() {
             </span>
           </Link>
 
+          {/* Join the community — Invisible Plum */}
           <Link
             to="/blooming-in-pain"
             className="group block rounded-2xl p-10 md:p-12 transition-opacity hover:opacity-95"

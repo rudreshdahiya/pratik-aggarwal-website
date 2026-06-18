@@ -63,29 +63,6 @@ const pillars = [
   },
 ];
 
-const faqs = [
-  {
-    q: "What is disability sensitization and why does it matter?",
-    a: "Most inclusion initiatives fail not due to policy gaps, but attitudinal barriers — people don't know how to talk about disability, what accommodations look like, or that many disabilities are invisible. Pratik's sensitization work combines lived experience of fibromyalgia with nine years of professional practice, so it's grounded in what disability actually feels like, not what training slides say it looks like.",
-  },
-  {
-    q: "Who typically works with Pratik?",
-    a: "Corporates and foundations seeking DEI training, NGOs building disability-inclusive programmes, universities and conferences looking for speakers on invisible disability, and government bodies needing policy advisory. Past engagements include UNICEF India, HCL Foundation, Tech Mahindra Foundation, and the National Disaster Management Authority.",
-  },
-  {
-    q: "Does Pratik work with organisations outside India?",
-    a: "Yes. While most frontline work is based in India, he has spoken at international events including the ARNEC Regional Conference in Manila and diplomatic events at the Spanish and Finnish embassies in New Delhi. He is open to international partnerships and speaking invitations.",
-  },
-  {
-    q: "What's the difference between sensitization and capacity building?",
-    a: "Sensitization shifts attitudes — helping people understand what disability is and how it shows up in the workplace, including invisible conditions. Capacity building goes further: it builds the skills and systems for frontline staff to deliver disability-inclusive services consistently, including training trainers so the knowledge stays after the engagement ends.",
-  },
-  {
-    q: "How long does a typical engagement last?",
-    a: "A conference talk may be 45–90 minutes; a corporate workshop a half-day or full-day. NGO and advisory projects typically span weeks or months. Every engagement starts with a conversation about what your context actually needs.",
-  },
-];
-
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function Services() {
@@ -161,11 +138,48 @@ export default function Services() {
         {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          "mainEntity": faqs.map(({ q, a }) => ({
-            "@type": "Question",
-            "name": q,
-            "acceptedAnswer": { "@type": "Answer", "text": a },
-          })),
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is disability sensitization and why does it matter?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Disability sensitization is the process of helping individuals and organisations understand disability — particularly invisible disabilities — from a rights-based and human perspective, not a charity or pity frame. It matters because most inclusion initiatives fail not due to policy gaps but due to attitudinal barriers: people don't know how to talk about disability, what reasonable accommodations look like, or that many disabilities are invisible. Pratik Aggarwal's sensitization work combines lived experience of fibromyalgia with nine years of professional practice, making it grounded in reality rather than theory."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who typically hires Pratik Aggarwal?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pratik works with corporates and foundations seeking DEI training, NGOs building disability-inclusive programmes, universities and conferences looking for speakers on invisible disability and chronic illness, and government bodies and multilateral organisations needing advisory input on inclusive policy and infrastructure. Past clients include UNICEF India, HCL Foundation, Tech Mahindra Foundation, and the National Disaster Management Authority."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Pratik Aggarwal work with organisations outside India?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. While most of Pratik's frontline work is based in India, he has spoken at international events and engages with multilateral organisations. His speaking engagements have included diplomatic events at the Embassy of Spain and Embassy of Finland in New Delhi, and the ARNEC Regional Conference in Manila. He is open to international partnerships and speaking invitations."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the difference between corporate sensitization and capacity building?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Corporate sensitization focuses on shifting attitudes — helping employees and leaders understand what disability actually is, how to talk about it, and how it shows up in the workplace, including invisible and chronic conditions. Capacity building, offered for NGOs and development organisations, goes further: it builds the skills, systems, and knowledge for frontline staff to deliver disability-inclusive services consistently and sustainably — connecting communities to welfare schemes, designing accessible programmes, and training trainers so the knowledge persists."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does an engagement with Pratik Aggarwal typically last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Engagements vary widely. A speaking slot at a conference may be a single session of 45–90 minutes. A corporate sensitization programme may be a half-day or full-day workshop, or a series over several weeks. Capacity building projects with NGOs or advisory work with government bodies are typically longer — spanning weeks or months. Every engagement starts with a conversation about what your context actually needs."
+              }
+            }
+          ]
         }
       ]} />
 
@@ -183,26 +197,26 @@ export default function Services() {
               How I help
             </h1>
           </div>
-          <p className="text-lg text-muted-foreground max-w-[40ch] leading-relaxed md:text-right md:pb-1">
-            Nine years of practice, one lived inside it — brought directly
-            to the organisations that need it most.
+          <p className="text-lg text-muted-foreground max-w-[42ch] leading-relaxed md:text-right md:pb-1">
+            Moving organisations from awareness to inclusion — through training,
+            advisory, and the kind of knowledge that only comes from lived
+            experience.
           </p>
         </div>
       </header>
 
       {/* ── Pillars ───────────────────────────────────────────────────── */}
       <div className="divide-y divide-border">
-        {pillars.map((pillar, i) => (
+        {pillars.map((pillar) => (
           <section
             key={pillar.id}
             id={pillar.id}
             aria-labelledby={`${pillar.id}-heading`}
             className="px-6 py-16 md:py-20"
-            style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F7F3EC" }}
           >
             <div className="max-w-5xl mx-auto grid md:grid-cols-[240px_1fr] gap-10 md:gap-16">
 
-              {/* Left col: number + title + for */}
+              {/* ── Left col: number + title + for ────────────────────── */}
               <div className="flex flex-col gap-5">
                 <span
                   className="text-sm font-semibold tabular-nums"
@@ -236,7 +250,7 @@ export default function Services() {
                 </div>
               </div>
 
-              {/* Right col: outcome + bullets */}
+              {/* ── Right col: outcome + bullets ──────────────────────── */}
               <div>
                 <div className="mb-8">
                   <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
@@ -298,7 +312,28 @@ export default function Services() {
           </div>
 
           <dl className="divide-y divide-border">
-            {faqs.map(({ q, a }) => (
+            {[
+              {
+                q: "What is disability sensitization and why does it matter?",
+                a: "Disability sensitization is the process of helping individuals and organisations understand disability — particularly invisible disabilities — from a rights-based and human perspective, not a charity or pity frame. It matters because most inclusion initiatives fail not due to policy gaps but due to attitudinal barriers: people don't know how to talk about disability, what reasonable accommodations look like, or that many disabilities are invisible. Pratik's sensitization work combines lived experience of fibromyalgia with nine years of professional practice, making it grounded in reality rather than theory.",
+              },
+              {
+                q: "Who typically works with Pratik?",
+                a: "Corporates and foundations seeking DEI training, NGOs building disability-inclusive programmes, universities and conferences looking for speakers on invisible disability and chronic illness, and government bodies and multilateral organisations needing advisory input on inclusive policy. Past engagements include UNICEF India, HCL Foundation, Tech Mahindra Foundation, and the National Disaster Management Authority.",
+              },
+              {
+                q: "Does Pratik work with organisations outside India?",
+                a: "Yes. While most frontline work is based in India, he has spoken at international events including the ARNEC Regional Conference in Manila and diplomatic events at the Spanish and Finnish embassies in New Delhi. He is open to international partnerships and speaking invitations.",
+              },
+              {
+                q: "What's the difference between sensitization and capacity building?",
+                a: "Corporate sensitization shifts attitudes — helping people understand what disability is and how it shows up in the workplace, including invisible conditions. Capacity building goes further: it builds the skills, systems, and institutional knowledge for frontline staff to deliver disability-inclusive services consistently — connecting communities to welfare schemes, designing accessible programmes, and training trainers so the work continues after the engagement ends.",
+              },
+              {
+                q: "How long does a typical engagement last?",
+                a: "It varies. A conference talk may be 45–90 minutes. A corporate sensitization workshop may be a half-day or full-day, or a series over several weeks. NGO capacity building and government advisory projects typically span weeks or months. Every engagement starts with a conversation about what your context actually needs.",
+              },
+            ].map(({ q, a }) => (
               <div key={q} className="py-8">
                 <dt
                   className="text-lg font-semibold text-foreground mb-3 leading-snug"
@@ -315,7 +350,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────────── */}
+      {/* ── Single CTA ────────────────────────────────────────────────── */}
       <section
         aria-labelledby="cta-heading"
         className="px-6 py-20 border-t border-border"
@@ -328,11 +363,11 @@ export default function Services() {
               className="text-3xl md:text-4xl text-foreground mb-3"
               style={{ fontFamily: "'Fraunces', Georgia, serif" }}
             >
-              Every engagement starts with a conversation.
+              Ready to work together?
             </h2>
-            <p className="text-base text-muted-foreground max-w-[48ch] leading-relaxed">
-              Tell me what you're working on — I'll be honest about whether
-              and how I can help.
+            <p className="text-base text-muted-foreground max-w-[52ch] leading-relaxed">
+              Every engagement starts with a conversation. Tell me what you're
+              working on — I'll tell you honestly whether and how I can help.
             </p>
           </div>
 

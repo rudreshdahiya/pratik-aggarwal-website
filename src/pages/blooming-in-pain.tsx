@@ -6,6 +6,8 @@ import { track } from "@vercel/analytics";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
+// In production replace with fetched Medium RSS or API data.
+// Each card links out to the real Medium post.
 const stories = [
   {
     id: 1,
@@ -80,25 +82,6 @@ const cardGradient = {
   plum: "linear-gradient(145deg, #EAE4F0 0%, #D4C8E4 100%)",
 };
 
-const faqs = [
-  {
-    q: "What is an invisible disability?",
-    a: "An invisible disability is a physical, mental, or neurological condition that is not immediately apparent to others — fibromyalgia, chronic fatigue, lupus, anxiety disorders, endometriosis, and hundreds more. People with invisible disabilities often face disbelief and the burden of having to prove their condition, because they 'don't look sick.' Blooming in Pain exists to tell the truth about what these conditions feel like from the inside.",
-  },
-  {
-    q: "Can I contribute without a formal diagnosis?",
-    a: "Yes. Getting a diagnosis for an invisible condition is itself often a long, difficult, gatekept process. You don't need a name for what you have. If you have lived experience of an invisible or chronic condition — whether named or not — your story belongs here. We'll work with you from there.",
-  },
-  {
-    q: "What kinds of conditions are covered here?",
-    a: "The full range: fibromyalgia, chronic fatigue syndrome (ME/CFS), lupus, endometriosis, anxiety, depression, PTSD, Crohn's, IBS, multiple sclerosis, POTS, PCOS, chronic migraine, and more. We also welcome stories about navigating healthcare, employment, and relationships with an invisible condition — not just the condition itself.",
-  },
-  {
-    q: "How is this different from a support group?",
-    a: "Blooming in Pain is a storytelling platform, not a support group. A support group is structured around helping members cope. This platform is structured around bearing witness — creating a public record of what life with invisible disability actually looks like. It's closer to literary non-fiction than peer support.",
-  },
-];
-
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function BloomingInPain() {
@@ -140,15 +123,52 @@ export default function BloomingInPain() {
         {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          "mainEntity": faqs.map(({ q, a }) => ({
-            "@type": "Question",
-            "name": q,
-            "acceptedAnswer": { "@type": "Answer", "text": a },
-          })),
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an invisible disability?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An invisible disability is a physical, mental, or neurological condition that is not immediately apparent to others. Examples include fibromyalgia, chronic fatigue syndrome (ME/CFS), lupus, anxiety disorders, depression, endometriosis, Crohn's disease, multiple sclerosis, and many others. People with invisible disabilities often face disbelief, dismissal, and the burden of having to prove their condition — because they 'don't look sick.' Blooming in Pain exists specifically to tell the truth about what these conditions feel like from the inside."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is Blooming in Pain?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Blooming in Pain is a storytelling platform founded by Pratik Aggarwal for people living with invisible disabilities. It publishes honest, first-person accounts of life with invisible illness — without inspiration framing, without tragedy arcs, and without the requirement that contributors be believed before they begin. Stories are published on Medium and shared through Instagram. Contributors do not need a formal diagnosis — they need to have lived it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I contribute a story to Blooming in Pain without a formal diagnosis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Blooming in Pain does not require a formal diagnosis to contribute. The platform recognises that getting a diagnosis for an invisible condition is itself often a long, difficult, and gatekept process. If you have lived experience of an invisible or chronic condition — whether named or not — your story belongs here. Stories are reviewed before publication and contributors are contacted within two weeks."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What kinds of invisible disabilities are covered on Blooming in Pain?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Blooming in Pain covers the full range of invisible and chronic conditions, including but not limited to: fibromyalgia, chronic fatigue syndrome (ME/CFS), lupus, endometriosis, anxiety disorders, depression, PTSD, Crohn's disease, IBS, multiple sclerosis, POTS, PCOS, chronic migraine, and other conditions that are not immediately visible to others. The platform also welcomes stories about the experience of navigating healthcare, employment, and relationships with an invisible condition."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is Blooming in Pain different from a support group?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Blooming in Pain is not a support group — it is a storytelling platform. The distinction matters: a support group is structured around helping members cope. Blooming in Pain is structured around bearing witness — creating a public record of what life with invisible disability actually looks like, for people who need to see their experience reflected and for people who need to understand it. It's closer to literary non-fiction than peer support."
+              }
+            }
+          ]
         }
       ]} />
 
-      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      {/* ── Hero / What it is ─────────────────────────────────────────── */}
       <header
         className="px-6 pt-20 pb-20 border-b border-border"
         style={{ backgroundColor: "#F8F4FB" }}
@@ -162,56 +182,54 @@ export default function BloomingInPain() {
           </p>
 
           <h1
-            className="text-5xl md:text-7xl text-foreground mb-10 tracking-tight"
+            className="text-5xl md:text-7xl text-foreground mb-8 tracking-tight"
             style={{ fontFamily: "'Fraunces', Georgia, serif", lineHeight: 1.07 }}
           >
             Blooming<br />
-            <em style={{ fontStyle: "italic", color: "#6E4C7E" }}>
+            <em
+              style={{
+                fontStyle: "italic",
+                color: "#6E4C7E",
+              }}
+            >
               in Pain
             </em>
           </h1>
 
-          <p className="text-lg text-foreground leading-relaxed mb-8 max-w-[58ch]">
-            A storytelling platform for people with invisible disabilities —
-            fibromyalgia, chronic fatigue, lupus, anxiety, endometriosis, and the
-            hundreds of other conditions that live in the gap between what bodies
-            hold and what medicine is prepared to name. Not a resource hub. Not a
-            support group. A place where people write honestly about their lives,
-            without having to explain themselves first.
-          </p>
-
-          <p
-            className="text-xl text-foreground leading-relaxed"
-            style={{ fontFamily: "'Fraunces', Georgia, serif", fontStyle: "italic" }}
-          >
-            We started this because we couldn't find it.
-            You're welcome to stay.
-          </p>
+          <div className="space-y-5 text-lg text-foreground leading-relaxed">
+            <p>
+              Blooming in Pain is a storytelling platform for people who live
+              with disabilities the world can't see — fibromyalgia, chronic
+              fatigue, lupus, anxiety disorders, endometriosis, and the hundreds
+              of other conditions that exist in the space between what bodies
+              hold and what medicine is prepared to name.
+            </p>
+            <p>
+              This isn't a resource hub. It isn't a support group. It's a place
+              where people write about their lives honestly — the hard parts and
+              the full parts — and where they don't have to explain themselves
+              before they begin.
+            </p>
+            <p>
+              We started this because we couldn't find it. You're welcome to
+              stay.
+            </p>
+          </div>
         </div>
       </header>
 
-      {/* ── Pull quote ────────────────────────────────────────────────── */}
-      <div
-        className="px-6 py-20 md:py-24"
-        style={{ backgroundColor: "#6E4C7E" }}
-      >
-        <div className="max-w-3xl mx-auto text-center">
+      {/* ── Pull-quote ────────────────────────────────────────────────── */}
+      <div className="px-6 py-16 border-b border-border">
+        <div className="max-w-[65ch] mx-auto">
           <blockquote>
             <p
-              className="text-2xl md:text-3xl lg:text-[2rem] italic leading-snug"
-              style={{
-                fontFamily: "'Fraunces', Georgia, serif",
-                color: "#FFFFFF",
-                lineHeight: 1.35,
-              }}
+              className="text-2xl md:text-3xl text-foreground italic leading-relaxed"
+              style={{ fontFamily: "'Fraunces', Georgia, serif" }}
             >
               "A space to be believed — not explained, not inspired, not
               compared to someone who has it worse. Just heard."
             </p>
-            <footer
-              className="mt-6 text-sm not-italic"
-              style={{ color: "rgba(255,255,255,0.6)" }}
-            >
+            <footer className="mt-5 text-sm text-muted-foreground not-italic">
               — Pratik Aggarwal, founder
             </footer>
           </blockquote>
@@ -235,7 +253,7 @@ export default function BloomingInPain() {
                 className="text-3xl md:text-4xl text-foreground"
                 style={{ fontFamily: "'Fraunces', Georgia, serif" }}
               >
-                From the community
+                Recent from the platform
               </h2>
             </div>
             <a
@@ -258,6 +276,7 @@ export default function BloomingInPain() {
               <li key={story.id} className="flex">
                 <Card className="flex flex-col w-full bg-card border-border shadow-none hover:shadow-sm transition-shadow">
 
+                  {/* Card image */}
                   <div
                     className="relative w-full rounded-t-lg overflow-hidden flex-none"
                     style={{ aspectRatio: "16/9" }}
@@ -269,6 +288,7 @@ export default function BloomingInPain() {
                       style={{ background: cardGradient[story.imgTint as keyof typeof cardGradient] }}
                       aria-hidden="true"
                     />
+                    {/* Tag overlaid on image */}
                     <span
                       className="absolute bottom-3 left-4 text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
                       style={{ backgroundColor: "rgba(255,255,255,0.85)", color: "#6E4C7E" }}
@@ -326,7 +346,24 @@ export default function BloomingInPain() {
             Questions about the platform
           </h2>
           <dl className="divide-y divide-border">
-            {faqs.map(({ q, a }) => (
+            {[
+              {
+                q: "What is an invisible disability?",
+                a: "An invisible disability is a physical, mental, or neurological condition that is not immediately apparent to others — fibromyalgia, chronic fatigue, lupus, anxiety disorders, endometriosis, and hundreds more. People with invisible disabilities often face disbelief and the burden of having to prove their condition, because they 'don't look sick.' Blooming in Pain exists to tell the truth about what these conditions feel like from the inside.",
+              },
+              {
+                q: "Can I contribute without a formal diagnosis?",
+                a: "Yes. Getting a diagnosis for an invisible condition is itself often a long, difficult, gatekept process. You don't need a name for what you have. If you have lived experience of an invisible or chronic condition — whether named or not — your story belongs here. We'll work with you from there.",
+              },
+              {
+                q: "What kinds of conditions are covered here?",
+                a: "The full range: fibromyalgia, chronic fatigue syndrome (ME/CFS), lupus, endometriosis, anxiety, depression, PTSD, Crohn's, IBS, multiple sclerosis, POTS, PCOS, chronic migraine, and more. We also welcome stories about navigating healthcare, employment, and relationships with an invisible condition — not just the condition itself.",
+              },
+              {
+                q: "How is this different from a support group?",
+                a: "Blooming in Pain is a storytelling platform, not a support group. A support group is structured around helping members cope. This platform is structured around bearing witness — creating a public record of what life with invisible disability actually looks like. It's closer to literary non-fiction than peer support.",
+              },
+            ].map(({ q, a }) => (
               <div key={q} className="py-8">
                 <dt
                   className="text-lg font-semibold text-foreground mb-3 leading-snug"
@@ -349,7 +386,7 @@ export default function BloomingInPain() {
         className="px-6 py-20 border-t border-border"
         style={{ backgroundColor: "#F8F4FB" }}
       >
-        <div className="max-w-[60ch] mx-auto text-center">
+        <div className="max-w-[65ch] mx-auto text-center">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
             style={{ color: "#6E4C7E" }}
@@ -364,12 +401,13 @@ export default function BloomingInPain() {
             Your story belongs here
           </h2>
           <p className="text-lg text-foreground leading-relaxed mb-4">
-            We're not looking for polished essays or resolved conclusions —
-            just honest accounts of what your life actually looks like.
+            We're not looking for polished essays or resolved conclusions. We're
+            looking for honest accounts of what your life actually looks like —
+            how you manage, how you don't, what helps, and what doesn't.
           </p>
           <p className="text-base text-muted-foreground leading-relaxed mb-10">
-            You don't need a diagnosis to contribute. You need to have lived
-            it. We'll work with you from there.
+            You don't need a diagnosis to contribute. You need to have lived it.
+            We'll work with you from there.
           </p>
           <Link
             to="/blooming-in-pain/submit"
@@ -385,7 +423,7 @@ export default function BloomingInPain() {
         </div>
       </section>
 
-      {/* ── Stay connected ────────────────────────────────────────────── */}
+      {/* ── Follow ────────────────────────────────────────────────────── */}
       <section
         aria-labelledby="follow-heading"
         className="px-6 py-16 md:py-20 border-t border-border"
@@ -401,6 +439,7 @@ export default function BloomingInPain() {
 
           <div className="grid sm:grid-cols-2 gap-5">
 
+            {/* Instagram */}
             <a
               href="https://instagram.com/blooming.in.pain"
               target="_blank"
@@ -433,6 +472,7 @@ export default function BloomingInPain() {
               </span>
             </a>
 
+            {/* Medium */}
             <a
               href="https://medium.com/@BloomingInPain"
               target="_blank"
@@ -468,6 +508,7 @@ export default function BloomingInPain() {
 
           </div>
 
+          {/* Newsletter note */}
           <div className="mt-10 pt-10 border-t border-border max-w-[60ch]">
             <p className="text-base text-muted-foreground leading-relaxed">
               We send a short newsletter a couple of times a month — new

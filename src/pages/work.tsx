@@ -19,16 +19,17 @@ interface Engagement {
   year: string;
   role: Role;
   description: string;
-  featured?: boolean;
+  featured?: boolean; // shows a photo placeholder above the entry
 }
 
 interface Group {
   id: string;
   category: string;
-  intro: string;
+  title: string;
   entries: Engagement[];
 }
 
+// Role pill appearance — AA-contrast text on tinted backgrounds
 const roleMeta: Record<Role, { label: string; bg: string; color: string }> = {
   Keynote:   { label: "Keynote",   bg: "#DFF2F2", color: "#145C5C" },
   Speaker:   { label: "Speaker",   bg: "#DFF2F2", color: "#145C5C" },
@@ -43,7 +44,7 @@ const groups: Group[] = [
   {
     id: "sensitization",
     category: "Training & Sensitization",
-    intro: "Workshops, lectures, and embedded programmes — for teams, universities, and institutions.",
+    title: "Disability Sensitization & Awareness",
     entries: [
       {
         event: "Delhi University",
@@ -82,7 +83,7 @@ const groups: Group[] = [
   {
     id: "policy",
     category: "Conferences, Legal & Policy",
-    intro: "Keynotes, panels, and advisory input at the intersection of disability law, policy, and public discourse.",
+    title: "Conferences, Legal & Policy",
     entries: [
       {
         event: "Purple Fest Goa 2024",
@@ -136,7 +137,7 @@ const groups: Group[] = [
   {
     id: "academic",
     category: "Academic & International",
-    intro: "Research-informed engagements with academic institutions and international organisations.",
+    title: "Academic & International",
     entries: [
       {
         event: "UNICEF Bihar",
@@ -326,27 +327,27 @@ export default function Work() {
 
       {/* ── Groups ────────────────────────────────────────────────────── */}
       <div className="divide-y divide-border">
-        {groups.map((group, gi) => (
+        {groups.map((group) => (
           <section
             key={group.id}
             id={group.id}
             aria-labelledby={`${group.id}-heading`}
             className="px-6 py-16 md:py-20"
-            style={{ backgroundColor: gi % 2 === 0 ? "#FFFFFF" : "#F7F3EC" }}
           >
             <div className="max-w-5xl mx-auto">
 
               {/* Section heading */}
               <div className="mb-10 md:mb-12">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+                  {group.category}
+                </p>
                 <h2
                   id={`${group.id}-heading`}
-                  className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3"
+                  className="text-3xl md:text-4xl text-foreground"
+                  style={{ fontFamily: "'Fraunces', Georgia, serif" }}
                 >
-                  {group.category}
+                  {group.title}
                 </h2>
-                <p className="text-base text-muted-foreground max-w-[52ch] leading-relaxed">
-                  {group.intro}
-                </p>
               </div>
 
               {/* Entry list */}
@@ -354,25 +355,31 @@ export default function Work() {
                 {group.entries.map((entry, i) => (
                   <li
                     key={entry.event}
-                    className={i > 0 ? "border-t border-border mt-0" : ""}
+                    className={
+                      i > 0 ? "border-t border-border mt-0" : ""
+                    }
                   >
+                    {/* Featured photo — sits flush above the entry row */}
                     {entry.featured && (
                       <div className={i > 0 ? "mt-8" : ""}>
                         <EventPhoto />
                       </div>
                     )}
 
+                    {/* Entry body */}
                     <div
                       className={`py-6 md:py-7 ${
-                        entry.featured
-                          ? "border border-t-0 border-border rounded-b-xl px-6 mb-2"
-                          : ""
+                        entry.featured ? "border border-t-0 border-border rounded-b-xl px-6 mb-2" : ""
                       }`}
                     >
+                      {/* Top row: event name left, role + year right */}
                       <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-2 mb-2">
                         <h3
                           className="text-base font-semibold text-foreground leading-snug"
-                          style={{ fontFamily: "'Atkinson Hyperlegible', system-ui, sans-serif" }}
+                          style={{
+                            fontFamily:
+                              "'Atkinson Hyperlegible', system-ui, sans-serif",
+                          }}
                         >
                           {entry.event}
                         </h3>
@@ -384,12 +391,14 @@ export default function Work() {
                         </div>
                       </div>
 
+                      {/* Org line */}
                       {entry.org && (
                         <p className="text-sm text-muted-foreground mb-2.5">
                           {entry.org}
                         </p>
                       )}
 
+                      {/* Description */}
                       <p className="text-base text-muted-foreground leading-relaxed max-w-[65ch]">
                         {entry.description}
                       </p>
@@ -415,12 +424,12 @@ export default function Work() {
               className="text-2xl md:text-3xl text-foreground mb-2"
               style={{ fontFamily: "'Fraunces', Georgia, serif" }}
             >
-              Available for speaking, panels, and advisory work.
+              Looking for a speaker or panelist?
             </h2>
             <p className="text-base text-muted-foreground max-w-[52ch] leading-relaxed">
-              Lived experience and nine years of professional practice — on
-              invisible disability, chronic illness, intersectional access, and
-              what inclusion actually requires.
+              I speak from lived experience and nine years of professional
+              practice — on invisible disability, chronic illness, intersectional
+              access, and what inclusion actually requires.
             </p>
           </div>
 
