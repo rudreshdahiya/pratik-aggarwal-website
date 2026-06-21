@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { PageMeta } from "@/components/page-meta";
 import { JsonLd } from "@/components/json-ld";
+import { useRevealAll } from "@/hooks/use-reveal-all";
 
 // ── Types & data ──────────────────────────────────────────────────────────────
 
@@ -29,15 +30,15 @@ interface Group {
   entries: Engagement[];
 }
 
-// Role pill appearance — AA-contrast text on tinted backgrounds
+// Role pill appearance — AA-contrast text on tinted backgrounds (Made Visible palette)
 const roleMeta: Record<Role, { label: string; bg: string; color: string }> = {
-  Keynote:   { label: "Keynote",   bg: "#DFF2F2", color: "#145C5C" },
-  Speaker:   { label: "Speaker",   bg: "#DFF2F2", color: "#145C5C" },
-  Trainer:   { label: "Trainer",   bg: "#DFF2F2", color: "#145C5C" },
-  Lecturer:  { label: "Lecturer",  bg: "#DFF2F2", color: "#145C5C" },
-  Panelist:  { label: "Panelist",  bg: "#EDE4F5", color: "#3C2050" },
-  Moderator: { label: "Moderator", bg: "#EDE4F5", color: "#3C2050" },
-  Advisory:  { label: "Advisory",  bg: "#E8E3DB", color: "#3D4653" },
+  Keynote:   { label: "Keynote",   bg: "#E2EDE7", color: "#1F3D2A" },
+  Speaker:   { label: "Speaker",   bg: "#E2EDE7", color: "#1F3D2A" },
+  Trainer:   { label: "Trainer",   bg: "#E2EDE7", color: "#1F3D2A" },
+  Lecturer:  { label: "Lecturer",  bg: "#E2EDE7", color: "#1F3D2A" },
+  Panelist:  { label: "Panelist",  bg: "#EDE4EF", color: "#3D1E3C" },
+  Moderator: { label: "Moderator", bg: "#EDE4EF", color: "#3D1E3C" },
+  Advisory:  { label: "Advisory",  bg: "#EDE9EF", color: "#595260" },
 };
 
 const groups: Group[] = [
@@ -212,13 +213,13 @@ function EventPhoto() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(140deg, #EDE8E0 0%, #D6CEBC 50%, #C8BAA4 100%)",
+              "linear-gradient(140deg, #EDE9EF 0%, #D8D0DC 50%, #C8BDD2 100%)",
           }}
           aria-hidden="true"
         />
         <span
           className="absolute inset-0 flex items-center justify-center text-sm italic"
-          style={{ color: "rgba(27,58,91,0.22)" }}
+          style={{ color: "rgba(30,26,36,0.2)" }}
           aria-hidden="true"
         >
           [Photo placeholder]
@@ -231,6 +232,7 @@ function EventPhoto() {
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Work() {
+  useRevealAll();
   return (
     <div>
       <PageMeta
@@ -244,8 +246,8 @@ export default function Work() {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pratikaggarwal.in" },
-            { "@type": "ListItem", "position": 2, "name": "Work & Engagements", "item": "https://pratikaggarwal.in/work" }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pratik-aggarwal-website.vercel.app" },
+            { "@type": "ListItem", "position": 2, "name": "Work & Engagements", "item": "https://pratik-aggarwal-website.vercel.app/work" }
           ]
         },
         {
@@ -263,7 +265,7 @@ export default function Work() {
                 "startDate": "2024",
                 "organizer": { "@type": "Organization", "name": "Disability Rights Coalition, Goa" },
                 "location": { "@type": "Place", "name": "Goa, India" },
-                "speaker": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" }
+                "speaker": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" }
               }
             },
             {
@@ -275,7 +277,7 @@ export default function Work() {
                 "startDate": "2023",
                 "organizer": { "@type": "Organization", "name": "UNICEF India" },
                 "location": { "@type": "Place", "name": "Bihar, India" },
-                "speaker": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" }
+                "speaker": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" }
               }
             },
             {
@@ -287,7 +289,7 @@ export default function Work() {
                 "startDate": "2022",
                 "organizer": { "@type": "Organization", "name": "National Disaster Management Authority & UN India" },
                 "location": { "@type": "Place", "name": "New Delhi, India" },
-                "speaker": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" }
+                "speaker": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" }
               }
             },
             {
@@ -299,7 +301,7 @@ export default function Work() {
                 "startDate": "2019",
                 "organizer": { "@type": "Organization", "name": "Asia-Pacific Regional Network for Early Childhood" },
                 "location": { "@type": "Place", "name": "Manila, Philippines" },
-                "speaker": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" }
+                "speaker": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" }
               }
             }
           ]
@@ -351,7 +353,7 @@ export default function Work() {
               </div>
 
               {/* Entry list */}
-              <ul className="list-none m-0 p-0" role="list">
+              <ul className="reveal-stagger list-none m-0 p-0" role="list">
                 {group.entries.map((entry, i) => (
                   <li
                     key={entry.event}
@@ -377,8 +379,7 @@ export default function Work() {
                         <h3
                           className="text-base font-semibold text-foreground leading-snug"
                           style={{
-                            fontFamily:
-                              "'Atkinson Hyperlegible', system-ui, sans-serif",
+                            fontFamily: "'Public Sans', system-ui, sans-serif",
                           }}
                         >
                           {entry.event}
@@ -415,7 +416,7 @@ export default function Work() {
       <section
         aria-labelledby="speak-cta-heading"
         className="px-6 py-16 border-t border-border"
-        style={{ backgroundColor: "#F2EEE7" }}
+        style={{ backgroundColor: "var(--surface)" }}
       >
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>

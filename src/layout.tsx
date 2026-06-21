@@ -130,9 +130,34 @@ export function Layout() {
       </header>
 
       {/* ── Main content ────────────────────────────────────────────────── */}
-      <main id="main-content" className="flex-1" tabIndex={-1}>
+      <main id="main-content" className="flex-1 pb-20 md:pb-0" tabIndex={-1}>
         <Outlet />
       </main>
+
+      {/* ── Sticky mobile CTA — single primary action (hidden on md+) ─── */}
+      <div
+        className="fixed bottom-0 inset-x-0 z-50 md:hidden border-t border-border backdrop-blur-sm"
+        style={{
+          paddingBottom: "env(safe-area-inset-bottom, 0px)",
+          backgroundColor: "rgba(246,244,247,0.97)",
+        }}
+      >
+        <div className="px-4 py-3">
+          <Link
+            to="/contact"
+            className="flex items-center justify-center w-full rounded-md font-semibold text-sm transition-opacity hover:opacity-90"
+            style={{
+              backgroundColor: "var(--plum)",
+              color: "#FFFFFF",
+              minHeight: "44px",
+              padding: "0.75rem 1.5rem",
+            }}
+            onClick={() => track("cta_clicked", { label: "Start a partnership", location: "sticky_mobile" })}
+          >
+            Start a partnership
+          </Link>
+        </div>
+      </div>
 
       {/* ── Footer ──────────────────────────────────────────────────────── */}
       <footer className="border-t border-border bg-background">
@@ -157,7 +182,7 @@ export function Layout() {
               .
             </p>
             <a
-              href="https://astha.org.in"
+              href="https://asthaindia.in"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-foreground underline underline-offset-4 hover:text-primary transition-colors"

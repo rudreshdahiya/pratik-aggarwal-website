@@ -129,7 +129,7 @@ export default function BloomingInPainSubmit() {
         <div className="max-w-[60ch] mx-auto text-center">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-6"
-            style={{ color: "#6E4C7E" }}
+            style={{ color: "var(--bloom)" }}
           >
             Story received
           </p>
@@ -152,7 +152,7 @@ export default function BloomingInPainSubmit() {
             <Link
               to="/blooming-in-pain"
               className="inline-flex items-center px-7 py-3 rounded-md font-semibold text-base text-white hover:opacity-90 transition-opacity"
-              style={{ backgroundColor: "#6E4C7E" }}
+              style={{ backgroundColor: "var(--plum)" }}
             >
               Back to Blooming in Pain
             </Link>
@@ -182,20 +182,20 @@ export default function BloomingInPainSubmit() {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Share Your Story — Blooming in Pain",
-        "url": "https://pratikaggarwal.in/blooming-in-pain/submit",
+        "url": "https://pratik-aggarwal-website.vercel.app/blooming-in-pain/submit",
         "description": "Story submission page for Blooming in Pain. People living with invisible disabilities can share their honest accounts for publication on the platform.",
-        "isPartOf": { "@id": "https://pratikaggarwal.in/#blooming-in-pain" }
+        "isPartOf": { "@id": "https://pratik-aggarwal-website.vercel.app/#blooming-in-pain" }
       }} />
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <header
         className="px-6 pt-20 pb-14 border-b border-border"
-        style={{ backgroundColor: "#F8F4FB" }}
+        style={{ backgroundColor: "var(--ground)" }}
       >
         <div className="max-w-[70ch] mx-auto">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ color: "#6E4C7E" }}
+            style={{ color: "var(--bloom)" }}
           >
             Blooming in Pain
           </p>
@@ -229,7 +229,7 @@ export default function BloomingInPainSubmit() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ color: "#6E4C7E" }}
+                  style={{ color: "var(--bloom)" }}
                 >
                   What we publish
                 </p>
@@ -244,7 +244,7 @@ export default function BloomingInPainSubmit() {
                     <li key={item} className="flex gap-3 items-start">
                       <span
                         className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: "#6E4C7E" }}
+                        style={{ backgroundColor: "var(--plum)" }}
                         aria-hidden="true"
                       />
                       {item}
@@ -256,7 +256,7 @@ export default function BloomingInPainSubmit() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ color: "#6E4C7E" }}
+                  style={{ color: "var(--bloom)" }}
                 >
                   What we don't publish
                 </p>
@@ -280,7 +280,7 @@ export default function BloomingInPainSubmit() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ color: "#6E4C7E" }}
+                  style={{ color: "var(--bloom)" }}
                 >
                   Timeline
                 </p>
@@ -293,7 +293,7 @@ export default function BloomingInPainSubmit() {
               <div>
                 <p
                   className="text-xs font-semibold uppercase tracking-widest mb-3"
-                  style={{ color: "#6E4C7E" }}
+                  style={{ color: "var(--bloom)" }}
                 >
                   Questions?
                 </p>
@@ -489,7 +489,7 @@ export default function BloomingInPainSubmit() {
                   type="submit"
                   disabled={isSubmitting}
                   className="h-12 px-8 text-base font-semibold disabled:opacity-60"
-                  style={{ backgroundColor: "#6E4C7E" }}
+                  style={{ backgroundColor: "var(--plum)" }}
                 >
                   {isSubmitting ? "Sending…" : "Submit your story"}
                 </Button>

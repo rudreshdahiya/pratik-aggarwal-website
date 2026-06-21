@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { PageMeta } from "@/components/page-meta";
 import { JsonLd } from "@/components/json-ld";
+import { useRevealAll } from "@/hooks/use-reveal-all";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -66,6 +67,7 @@ const pillars = [
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function Services() {
+  useRevealAll();
   return (
     <div>
       <PageMeta
@@ -79,8 +81,8 @@ export default function Services() {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pratikaggarwal.in" },
-            { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://pratikaggarwal.in/services" }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pratik-aggarwal-website.vercel.app" },
+            { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://pratik-aggarwal-website.vercel.app/services" }
           ]
         },
         {
@@ -95,7 +97,7 @@ export default function Services() {
                 "@type": "Service",
                 "name": "Corporate Disability Sensitization",
                 "description": "DEI training workshops, language guidance, HR policy review, and Training of Trainers programmes to help corporate teams understand and include people with invisible disabilities.",
-                "provider": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" },
+                "provider": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" },
                 "areaServed": "IN",
                 "audience": { "@type": "Audience", "audienceType": "Corporates and foundations" }
               }
@@ -106,7 +108,7 @@ export default function Services() {
                 "@type": "Service",
                 "name": "NGO Disability Capacity Building",
                 "description": "Helping NGOs connect communities to government welfare schemes, build accessibility into programmes, and train frontline workers on disability-inclusive, rights-based practice.",
-                "provider": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" },
+                "provider": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" },
                 "areaServed": "IN",
                 "audience": { "@type": "Audience", "audienceType": "Small and large NGOs" }
               }
@@ -117,7 +119,7 @@ export default function Services() {
                 "@type": "Service",
                 "name": "Academic & Public Speaking on Disability",
                 "description": "Guest lectures, keynote addresses, panel discussions, and orientation sessions on invisible disability, chronic illness, and disability inclusion for universities, conferences, and institutions.",
-                "provider": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" },
+                "provider": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" },
                 "areaServed": "Worldwide",
                 "audience": { "@type": "Audience", "audienceType": "Universities, colleges, and conferences" }
               }
@@ -128,7 +130,7 @@ export default function Services() {
                 "@type": "Service",
                 "name": "Government & Multilateral Disability Advisory",
                 "description": "Policy advisory and programme input on disability-inclusive child protection, inclusive education, women empowerment, and accessible infrastructure for state governments and multilateral organisations.",
-                "provider": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" },
+                "provider": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" },
                 "areaServed": "IN",
                 "audience": { "@type": "Audience", "audienceType": "State governments and multilateral organisations" }
               }
@@ -214,13 +216,13 @@ export default function Services() {
             aria-labelledby={`${pillar.id}-heading`}
             className="px-6 py-16 md:py-20"
           >
-            <div className="max-w-5xl mx-auto grid md:grid-cols-[240px_1fr] gap-10 md:gap-16">
+            <div className="reveal-stagger max-w-5xl mx-auto grid md:grid-cols-[240px_1fr] gap-10 md:gap-16">
 
               {/* ── Left col: number + title + for ────────────────────── */}
               <div className="flex flex-col gap-5">
                 <span
                   className="text-sm font-semibold tabular-nums"
-                  style={{ color: "#1B6B6B" }}
+                  style={{ color: "var(--bloom)" }}
                   aria-hidden="true"
                 >
                   {pillar.number}
@@ -273,7 +275,7 @@ export default function Services() {
                       <li key={item} className="flex items-start gap-3">
                         <span
                           className="mt-[0.45em] flex-none text-sm leading-none font-bold"
-                          style={{ color: "#1B6B6B" }}
+                          style={{ color: "var(--bloom)" }}
                           aria-hidden="true"
                         >
                           —
@@ -311,7 +313,7 @@ export default function Services() {
             </p>
           </div>
 
-          <dl className="divide-y divide-border">
+          <dl className="reveal-stagger divide-y divide-border">
             {[
               {
                 q: "What is disability sensitization and why does it matter?",
@@ -354,9 +356,9 @@ export default function Services() {
       <section
         aria-labelledby="cta-heading"
         className="px-6 py-20 border-t border-border"
-        style={{ backgroundColor: "#F2EEE7" }}
+        style={{ backgroundColor: "var(--surface)" }}
       >
-        <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_auto] gap-8 items-center">
+        <div className="reveal max-w-5xl mx-auto grid md:grid-cols-[1fr_auto] gap-8 items-center">
           <div>
             <h2
               id="cta-heading"

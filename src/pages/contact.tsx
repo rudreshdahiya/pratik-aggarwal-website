@@ -4,13 +4,11 @@ import { track } from "@vercel/analytics";
 import { PageMeta } from "@/components/page-meta";
 import { JsonLd } from "@/components/json-ld";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type InquiryType = "partner" | "speaking" | "consulting" | "community" | "";
+type InquiryType = "speaking" | "consulting" | "partner" | "community" | "";
 
 interface FormState {
   inquiryType: InquiryType;
@@ -21,49 +19,24 @@ interface FormState {
 }
 
 interface FormErrors {
-  inquiryType?: string;
   name?: string;
+  inquiryType?: string;
   email?: string;
   message?: string;
 }
-
-// ── Data ──────────────────────────────────────────────────────────────────────
-
-const inquiryTypes: { value: InquiryType; label: string; description: string }[] = [
-  {
-    value: "partner",
-    label: "Partnership",
-    description: "Collaborate on disability inclusion initiatives",
-  },
-  {
-    value: "speaking",
-    label: "Speaking / Talk",
-    description: "Book Pratik for a keynote, panel, or event",
-  },
-  {
-    value: "consulting",
-    label: "Consulting",
-    description: "Sensitization, capacity building, or advisory work",
-  },
-  {
-    value: "community",
-    label: "Community / Stories",
-    description: "Share a story or connect with Blooming in Pain",
-  },
-];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function validate(form: FormState): FormErrors {
   const errors: FormErrors = {};
-  if (!form.inquiryType) errors.inquiryType = "Please select an inquiry type.";
-  if (!form.name.trim()) errors.name = "Please enter your name.";
+  if (!form.name.trim()) errors.name = "Please tell me your name.";
+  if (!form.inquiryType) errors.inquiryType = "Please choose what you're reaching out about.";
   if (!form.email.trim()) {
     errors.email = "Please enter your email address.";
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
     errors.email = "Please enter a valid email address.";
   }
-  if (!form.message.trim()) errors.message = "Please add a message.";
+  if (!form.message.trim()) errors.message = "Please share a bit more about what you have in mind.";
   return errors;
 }
 
@@ -83,7 +56,7 @@ export default function Contact() {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -102,14 +75,9 @@ export default function Contact() {
     const validation = validate(form);
     if (Object.keys(validation).length > 0) {
       setErrors(validation);
-      const focusableIds: Partial<Record<keyof FormErrors, string>> = {
-        name: "name",
-        email: "email",
-        message: "message",
-      };
-      const firstKey = Object.keys(validation)[0] as keyof FormErrors;
-      const focusId = focusableIds[firstKey];
-      if (focusId) document.getElementById(focusId)?.focus();
+      const focusOrder: (keyof FormErrors)[] = ["name", "inquiryType", "email", "message"];
+      const firstKey = focusOrder.find((k) => validation[k]);
+      if (firstKey) document.getElementById(firstKey)?.focus();
       return;
     }
 
@@ -130,32 +98,29 @@ export default function Contact() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Submission failed");
-      }
+      if (!response.ok) throw new Error("Submission failed");
 
       track("contact_form_submitted", { inquiry_type: form.inquiryType });
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
-      setSubmitError("Something went wrong sending your message. Please try again, or email hello@bloominginpain.com directly.");
+      setSubmitError(
+        "Something went wrong sending your message. Please try again, or email hello@bloominginpain.com directly."
+      );
     } finally {
       setIsSubmitting(false);
     }
   }
 
-  // ── Success state ────────────────────────────────────────────────────────
+  // ── Success state ──────────────────────────────────────────────────────────
 
   if (submitted) {
     return (
-      <section
-        aria-labelledby="success-heading"
-        className="px-6 py-24 md:py-36"
-      >
+      <section aria-labelledby="success-heading" className="px-6 py-24 md:py-36">
         <div className="max-w-[60ch] mx-auto text-center">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-6"
-            style={{ color: "#1B6B6B" }}
+            style={{ color: "var(--bloom)" }}
           >
             Message received
           </p>
@@ -181,7 +146,8 @@ export default function Contact() {
           <div className="flex flex-wrap justify-center gap-5">
             <Link
               to="/"
-              className="inline-flex items-center px-7 py-3 rounded-md bg-primary text-primary-foreground font-semibold text-base hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center px-7 py-3 rounded-md font-semibold text-base text-white hover:opacity-90 transition-opacity"
+              style={{ backgroundColor: "var(--plum)" }}
             >
               Back to home
             </Link>
@@ -197,7 +163,9 @@ export default function Contact() {
     );
   }
 
-  // ── Form ─────────────────────────────────────────────────────────────────
+  // ── Form ───────────────────────────────────────────────────────────────────
+
+  const hasErrors = Object.keys(errors).length > 0;
 
   return (
     <>
@@ -211,16 +179,17 @@ export default function Contact() {
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "name": "Contact Pratik Aggarwal",
-        "url": "https://pratikaggarwal.in/contact",
-        "description": "Contact page for Pratik Aggarwal — disability inclusion expert, speaker, and founder of Blooming in Pain. Accepts inquiries for partnership, speaking, consulting, and community engagement.",
-        "mainEntity": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" }
+        "url": "https://pratik-aggarwal-website.vercel.app/contact",
+        "description": "Contact page for Pratik Aggarwal — disability inclusion expert, speaker, and founder of Blooming in Pain.",
+        "mainEntity": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" }
       }} />
-      {/* ── Page header ────────────────────────────────────────────────────── */}
+
+      {/* ── Page header ──────────────────────────────────────────────────── */}
       <section aria-labelledby="contact-heading" className="px-6 py-16 md:py-20">
         <div className="max-w-5xl mx-auto">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#1B6B6B" }}
+            style={{ color: "var(--bloom)" }}
           >
             Get in touch
           </p>
@@ -232,22 +201,27 @@ export default function Contact() {
             Let's work together.
           </h1>
           <p className="text-lg text-muted-foreground max-w-[52ch] leading-relaxed">
-            Whether you want to partner, book a talk, commission advisory work,
-            or share a story — I'd love to hear from you.
+            Fill in the blanks below — or if you prefer,{" "}
+            <a
+              href="mailto:hello@bloominginpain.com"
+              className="underline underline-offset-4 hover:text-foreground transition-colors"
+            >
+              email me directly
+            </a>
+            .
           </p>
         </div>
       </section>
 
       <div className="border-t border-border" aria-hidden="true" />
 
-      {/* ── Body: sidebar + form ────────────────────────────────────────────── */}
+      {/* ── Body: sidebar + form ─────────────────────────────────────────── */}
       <section className="px-6 py-16 md:py-20">
         <div className="max-w-5xl mx-auto grid md:grid-cols-[280px_1fr] gap-16">
 
           {/* ── Sidebar ──────────────────────────────────────────────────── */}
           <aside aria-label="Contact details">
             <div className="space-y-10">
-
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
                   Email
@@ -302,190 +276,185 @@ export default function Contact() {
                 </p>
                 <Link
                   to="/blooming-in-pain"
-                  className="text-sm font-semibold text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+                  className="text-sm font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity"
+                  style={{ color: "var(--sage)" }}
                 >
                   Learn how to contribute →
                 </Link>
               </div>
-
             </div>
           </aside>
 
           {/* ── Form ─────────────────────────────────────────────────────── */}
           <div>
-            <form
-              onSubmit={handleSubmit}
-              noValidate
-              aria-label="Contact form"
-            >
-              {/* Inquiry type */}
-              <fieldset className="mb-10">
-                <legend className="text-base font-semibold text-foreground mb-4">
-                  What's this about?{" "}
-                  <span aria-hidden="true" className="text-destructive">*</span>
-                </legend>
+            <form onSubmit={handleSubmit} noValidate aria-label="Contact form">
 
-                {errors.inquiryType && (
-                  <p
-                    id="inquiryType-error"
-                    role="alert"
-                    className="text-sm text-destructive mb-3"
+              {/* ── Mad-Libs sentence ──────────────────────────────────── */}
+              <fieldset className="mb-10 border-0 p-0 m-0">
+                <legend className="sr-only">Tell me about yourself and your inquiry</legend>
+
+                <p
+                  className="leading-[2.2]"
+                  style={{
+                    fontFamily: "'Fraunces', Georgia, serif",
+                    fontSize: "clamp(1.25rem, 2.8vw, 1.75rem)",
+                    color: "var(--ink)",
+                  }}
+                >
+                  <span>Hi Pratik, I'm </span>
+                  <label htmlFor="name" className="sr-only">Your name (required)</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="your name"
+                    value={form.name}
+                    onChange={handleChange}
+                    aria-required="true"
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? "err-name" : undefined}
+                    className="ml-field"
+                    style={{ width: "clamp(8ch, 18ch, 22ch)" }}
+                  />
+                  <span> from </span>
+                  <label htmlFor="organisation" className="sr-only">Organisation (optional)</label>
+                  <input
+                    id="organisation"
+                    name="organisation"
+                    type="text"
+                    autoComplete="organization"
+                    placeholder="your org"
+                    value={form.organisation}
+                    onChange={handleChange}
+                    className="ml-field"
+                    style={{ width: "clamp(8ch, 18ch, 22ch)" }}
+                  />
+                  <span>, reaching out about </span>
+                  <label htmlFor="inquiryType" className="sr-only">Type of inquiry (required)</label>
+                  <select
+                    id="inquiryType"
+                    name="inquiryType"
+                    value={form.inquiryType}
+                    onChange={(e) => handleInquiryType(e.target.value as InquiryType)}
+                    aria-required="true"
+                    aria-invalid={!!errors.inquiryType}
+                    aria-describedby={errors.inquiryType ? "err-type" : undefined}
+                    className="ml-field ml-select"
+                    style={{ minWidth: "17ch" }}
                   >
-                    {errors.inquiryType}
-                  </p>
-                )}
+                    <option value="">choose one</option>
+                    <option value="speaking">a speaking engagement</option>
+                    <option value="consulting">consulting work</option>
+                    <option value="partner">a partnership</option>
+                    <option value="community">Blooming in Pain</option>
+                  </select>
+                  <span>. Reach me at </span>
+                  <label htmlFor="email" className="sr-only">Your email address (required)</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="your@email.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    aria-required="true"
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "err-email" : undefined}
+                    className="ml-field"
+                    style={{ width: "clamp(10ch, 22ch, 26ch)" }}
+                  />
+                  <span>.</span>
+                </p>
 
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {inquiryTypes.map((type) => {
-                    const isSelected = form.inquiryType === type.value;
-                    return (
-                      <label
-                        key={type.value}
-                        className={`flex flex-col gap-1 p-4 rounded-lg border cursor-pointer transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring ${
-                          isSelected
-                            ? "border-primary bg-card"
-                            : "border-border bg-card hover:border-muted-foreground/40"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="inquiryType"
-                          value={type.value}
-                          checked={isSelected}
-                          onChange={() => handleInquiryType(type.value as InquiryType)}
-                          className="sr-only"
-                          aria-describedby={errors.inquiryType ? "inquiryType-error" : undefined}
-                        />
-                        <span
-                          className="text-sm font-semibold text-foreground"
-                          style={isSelected ? { color: "#1B6B6B" } : {}}
-                        >
-                          {type.label}
-                        </span>
-                        <span className="text-xs text-muted-foreground leading-snug">
-                          {type.description}
-                        </span>
-                      </label>
-                    );
-                  })}
-                </div>
+                {/* Error summary */}
+                {hasErrors && (
+                  <div
+                    role="alert"
+                    aria-label="Please fix the following"
+                    className="mt-5 space-y-1.5"
+                  >
+                    {errors.name && (
+                      <p id="err-name" className="text-sm" style={{ color: "var(--destructive)" }}>
+                        <a href="#name" className="underline underline-offset-2 hover:no-underline">Name</a>
+                        : {errors.name}
+                      </p>
+                    )}
+                    {errors.inquiryType && (
+                      <p id="err-type" className="text-sm" style={{ color: "var(--destructive)" }}>
+                        <a href="#inquiryType" className="underline underline-offset-2 hover:no-underline">Inquiry type</a>
+                        : {errors.inquiryType}
+                      </p>
+                    )}
+                    {errors.email && (
+                      <p id="err-email" className="text-sm" style={{ color: "var(--destructive)" }}>
+                        <a href="#email" className="underline underline-offset-2 hover:no-underline">Email</a>
+                        : {errors.email}
+                      </p>
+                    )}
+                    {errors.message && (
+                      <p id="err-message" className="text-sm" style={{ color: "var(--destructive)" }}>
+                        <a href="#message" className="underline underline-offset-2 hover:no-underline">Message</a>
+                        : {errors.message}
+                      </p>
+                    )}
+                  </div>
+                )}
               </fieldset>
 
-              {/* Name */}
-              <div className="mb-6">
-                <Label htmlFor="name" className="text-base font-semibold text-foreground mb-2 block">
-                  Your name{" "}
-                  <span aria-hidden="true" className="text-destructive">*</span>
-                </Label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  aria-required="true"
-                  aria-describedby={errors.name ? "name-error" : undefined}
-                  aria-invalid={!!errors.name}
-                  className={`text-base h-12 ${errors.name ? "border-destructive" : ""}`}
-                  placeholder="Your full name"
-                />
-                {errors.name && (
-                  <p id="name-error" role="alert" className="text-sm text-destructive mt-1.5">
-                    {errors.name}
-                  </p>
-                )}
-              </div>
-
-              {/* Organisation */}
-              <div className="mb-6">
-                <Label htmlFor="organisation" className="text-base font-semibold text-foreground mb-2 block">
-                  Organisation{" "}
-                  <span className="text-sm font-normal text-muted-foreground">(optional)</span>
-                </Label>
-                <Input
-                  id="organisation"
-                  name="organisation"
-                  type="text"
-                  autoComplete="organization"
-                  value={form.organisation}
-                  onChange={handleChange}
-                  className="text-base h-12"
-                  placeholder="Where are you writing from?"
-                />
-              </div>
-
-              {/* Email */}
-              <div className="mb-6">
-                <Label htmlFor="email" className="text-base font-semibold text-foreground mb-2 block">
-                  Email address{" "}
-                  <span aria-hidden="true" className="text-destructive">*</span>
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  aria-required="true"
-                  aria-describedby={errors.email ? "email-error" : undefined}
-                  aria-invalid={!!errors.email}
-                  className={`text-base h-12 ${errors.email ? "border-destructive" : ""}`}
-                  placeholder="you@example.com"
-                />
-                {errors.email && (
-                  <p id="email-error" role="alert" className="text-sm text-destructive mt-1.5">
-                    {errors.email}
-                  </p>
-                )}
-              </div>
-
-              {/* Message */}
+              {/* ── Message ──────────────────────────────────────────────── */}
               <div className="mb-10">
-                <Label htmlFor="message" className="text-base font-semibold text-foreground mb-2 block">
-                  Message{" "}
-                  <span aria-hidden="true" className="text-destructive">*</span>
-                </Label>
+                <label
+                  htmlFor="message"
+                  className="block text-base font-semibold mb-3"
+                  style={{ color: "var(--ink)" }}
+                >
+                  Anything else to share?{" "}
+                  <span aria-hidden="true" style={{ color: "var(--destructive)" }}>*</span>
+                </label>
                 <Textarea
                   id="message"
                   name="message"
-                  rows={6}
+                  rows={5}
                   value={form.message}
                   onChange={handleChange}
                   aria-required="true"
-                  aria-describedby={errors.message ? "message-error" : undefined}
+                  aria-describedby={errors.message ? "err-message" : undefined}
                   aria-invalid={!!errors.message}
                   className={`text-base resize-none ${errors.message ? "border-destructive" : ""}`}
-                  placeholder="Tell me a little about what you have in mind."
+                  placeholder="Context, timing, questions you already have — whatever feels useful."
                 />
-                {errors.message && (
-                  <p id="message-error" role="alert" className="text-sm text-destructive mt-1.5">
-                    {errors.message}
-                  </p>
-                )}
               </div>
 
-              {/* Required note + Submit */}
+              {/* ── Submit ───────────────────────────────────────────────── */}
               {submitError && (
-                <p role="alert" className="text-sm text-destructive mb-4">
+                <p role="alert" className="text-sm mb-4" style={{ color: "var(--destructive)" }}>
                   {submitError}
                 </p>
               )}
+
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="h-12 px-8 text-base font-semibold disabled:opacity-60"
+                  className="h-12 px-8 text-base font-semibold text-white disabled:opacity-60"
+                  style={{ backgroundColor: "var(--plum)" }}
+                  onClick={() =>
+                    !isSubmitting &&
+                    track("cta_clicked", { label: "Send message", location: "contact_form" })
+                  }
                 >
                   {isSubmitting ? "Sending…" : "Send message"}
                 </Button>
                 <p className="text-sm text-muted-foreground">
-                  <span aria-hidden="true">*</span> Required fields
+                  <span aria-hidden="true">*</span> Required field
                 </p>
               </div>
+
             </form>
           </div>
+
         </div>
       </section>
     </>

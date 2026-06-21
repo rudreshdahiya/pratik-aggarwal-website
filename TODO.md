@@ -9,17 +9,18 @@ Status: Complete
 Tasks
 
 * [x] Create /contact route
-* [x] Build contact page layout
-* [x] Add inquiry type selector
-* [x] Add organization field
-* [x] Add message field
-* [x] Add validation
-* [x] Add success state
-* [x] Add fallback email contact
-* [x] Add social links
-* [x] Ensure keyboard accessibility
-* [ ] Test mobile responsiveness
-* [ ] Wire Formspree endpoint (production step)
+* [x] Mad-Libs conversational form (name / org / inquiry type / email inline sentence)
+* [x] Every blank is a labeled field (sr-only labels, aria-required, aria-invalid, aria-describedby)
+* [x] Error summary with anchor links to erroring fields
+* [x] Inquiry type as inline select with underline-only styling
+* [x] Message textarea below sentence
+* [x] Validation + focus management on submit
+* [x] Success state
+* [x] Fallback email contact link
+* [x] Sidebar with email, socials, Blooming in Pain link
+* [x] Keyboard accessible — all 4 fields navigable, errors described by id
+* [x] Mobile responsive — sentence wraps naturally
+* [x] Wire Formspree endpoint (env var in .env.local — production step)
 
 ---
 
@@ -74,15 +75,20 @@ Tasks
 
 ## Accessibility Audit
 
-Status: Complete (code audit) — screen reader test pending
+Status: Complete (code audit + contrast) — screen reader test pending
 
 Tasks
 
-* [x] Keyboard navigation audit — fixed focus bug, radio focus indicator, Escape key, ol→ul
-* [x] Heading hierarchy audit — passes on all pages; About uses landmarks (intentional editorial choice)
-* [x] Contrast audit — primary teal darkened to #1B6B6B; all text now passes AA
-* [x] Form accessibility audit — labels, aria-required, aria-invalid, aria-describedby, focus management all correct
-* [ ] Screen reader test — requires real browser + assistive technology (VoiceOver/NVDA)
+* [x] Heading hierarchy — all 7 pages: one h1, no skips, clean tree
+* [x] Landmark audit — main + nav on every page, aside on contact/submit sidebars
+* [x] Input labels — all fields have label[for] or aria-label; Mad-Libs blanks have sr-only labels
+* [x] Button names — all buttons have text or aria-label
+* [x] html[lang="en"] present
+* [x] Contrast audit v2 — --bloom darkened from #C04C7A → #B84472 (4.67:1 on ground, passes AA); all palette pairs now pass AA for normal text
+* [x] Focus ring — 2px solid var(--bloom) via :focus-visible; 4.67:1+ on all backgrounds
+* [x] Reduced motion — CSS transitions suppressed globally; HeroRoleWord stops cycling; MadeVisibleReveal shows portrait by default
+* [x] Skip to main content link in layout
+* [ ] Screen reader test — requires real browser + VoiceOver/NVDA
 
 ---
 
@@ -90,6 +96,8 @@ Tasks
 
 Status: Complete
 
+* [x] `llms.txt` at `public/llms.txt` — machine-readable profile for AI systems
+* [x] "Ask Claude" + "Ask ChatGPT" deep-link pills on about page header
 * [x] Schema.org JSON-LD on all 7 pages
 * [x] Person entity with knowsAbout, sameAs, affiliation
 * [x] Organization schema for ASTHA and Blooming in Pain
@@ -100,6 +108,18 @@ Status: Complete
 * [x] author + keywords meta in PageMeta
 * [x] FAQ sections on Services and Blooming in Pain pages
 * [x] Medium outbound tracking added
+
+---
+
+## Testimonials
+
+Status: Deferred — needs real quotes
+
+Notes
+
+* Component pattern is designed and ready (disclosure, aria-expanded/controls, reduced-motion support)
+* Removed from home page until Pratik collects real attributed quotes with permission
+* Re-add to `home.tsx` between EngagementsSection and the split CTA once real testimonials are available
 
 ---
 

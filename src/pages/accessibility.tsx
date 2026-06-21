@@ -14,16 +14,16 @@ export default function Accessibility() {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Accessibility Statement — Pratik Aggarwal",
-        "url": "https://pratikaggarwal.in/accessibility",
-        "description": "Accessibility statement for pratikaggarwal.in. The site targets WCAG 2.1 AA compliance. Includes information on what has been implemented, known limitations, and how to report accessibility issues.",
-        "isPartOf": { "@type": "WebSite", "url": "https://pratikaggarwal.in" }
+        "url": "https://pratik-aggarwal-website.vercel.app/accessibility",
+        "description": "Accessibility statement for pratik-aggarwal-website.vercel.app. The site targets WCAG 2.1 AA compliance. Includes information on what has been implemented, known limitations, and how to report accessibility issues.",
+        "isPartOf": { "@type": "WebSite", "url": "https://pratik-aggarwal-website.vercel.app" }
       }} />
       {/* ── Page header ────────────────────────────────────────────────────── */}
       <section aria-labelledby="a11y-heading" className="px-6 py-16 md:py-20">
         <div className="max-w-5xl mx-auto">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#1B6B6B" }}
+            style={{ color: "var(--bloom)" }}
           >
             Accessibility
           </p>
@@ -98,7 +98,7 @@ export default function Accessibility() {
                 <li key={item} className="flex gap-3 items-start">
                   <span
                     className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: "#1B6B6B" }}
+                    style={{ backgroundColor: "var(--bloom)" }}
                     aria-hidden="true"
                   />
                   {item}

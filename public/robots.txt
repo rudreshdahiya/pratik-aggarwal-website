@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pratikaggarwal.in/sitemap.xml
+Sitemap: https://pratik-aggarwal-website.vercel.app/sitemap.xml

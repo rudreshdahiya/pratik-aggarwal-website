@@ -37,49 +37,187 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  /* Named palette tokens for direct use */
-  --color-ink-navy: #1B3A5B;
-  --color-healing-teal: #2E8B8B;
-  --color-invisible-plum: #6E4C7E;
-  --color-warm-sand: #F7F3EC;
-  --color-quiet-grey: #5A6472;
+  /* Named Made Visible palette tokens */
+  --color-plum: var(--plum);
+  --color-bloom: var(--bloom);
+  --color-sage: var(--sage);
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
 }
 
 :root {
   --radius: 0.5rem;
 
-  /* Blooming in Pain palette */
-  --background: #F7F3EC;   /* Warm Sand */
-  --foreground: #1B3A5B;   /* Ink Navy */
-  --card: #FFFFFF;
-  --card-foreground: #1B3A5B;
-  --popover: #FFFFFF;
-  --popover-foreground: #1B3A5B;
-  --primary: #1B6B6B;      /* Healing Teal — darkened for AA contrast (was #2E8B8B) */
+  /* ── Made Visible palette ─────────────────────────────────────── */
+  --ground:  #F6F4F7;   /* lilac-white base */
+  --surface: #FFFFFF;   /* cards, panels */
+  --ink:     #1E1A24;   /* primary text — plum-black */
+  --muted-text: #595260; /* secondary text */
+  --plum:    #5C2A57;   /* primary brand + CTA */
+  --bloom:   #B84472;   /* reveal / hover / focus accent — darkened to 4.67:1 on ground (AA) */
+  --sage:    #4F6F5C;   /* community path */
+  --line:    #E4DEE6;   /* dividers, borders */
+
+  /* ── Shadcn semantic token mapping ───────────────────────────── */
+  --background: var(--ground);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--plum);
   --primary-foreground: #FFFFFF;
-  --secondary: #6E4C7E;    /* Invisible Plum */
+  --secondary: var(--sage);
   --secondary-foreground: #FFFFFF;
-  --muted: #EDE8E0;
-  --muted-foreground: #5A6472; /* Quiet Grey */
-  --accent: #EDE8E0;
-  --accent-foreground: #1B3A5B;
+  --muted: #EDE9EF;
+  --muted-foreground: var(--muted-text);
+  --accent: #EDE9EF;
+  --accent-foreground: var(--ink);
   --destructive: #B91C1C;
-  --border: #D8D0C4;
-  --input: #C8C0B4;
-  --ring: #1B6B6B;
-  --chart-1: #1B6B6B;
-  --chart-2: #6E4C7E;
-  --chart-3: #1B3A5B;
-  --chart-4: #5A6472;
-  --chart-5: #D8D0C4;
-  --sidebar: #F7F3EC;
-  --sidebar-foreground: #1B3A5B;
-  --sidebar-primary: #1B6B6B;
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--bloom);
+  --chart-1: var(--plum);
+  --chart-2: var(--bloom);
+  --chart-3: var(--sage);
+  --chart-4: var(--muted-text);
+  --chart-5: var(--line);
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--plum);
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #EDE8E0;
-  --sidebar-accent-foreground: #1B3A5B;
-  --sidebar-border: #D8D0C4;
-  --sidebar-ring: #1B6B6B;
+  --sidebar-accent: #EDE9EF;
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--line);
+  --sidebar-ring: var(--bloom);
+}
+
+/* ── Motion tokens ───────────────────────────────────────────────────────────
+   Based on motion-design skill decision tree:
+   - ease-out-quart  → enter/exit (user-triggered, fast start)
+   - ease-in-out-quart → on-screen morph (expand/collapse, layout change)
+   - ease (built-in)  → subtle hover states (color, opacity, border)
+   - linear           → time/progress visualisations
+   ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --ease-out-quart:    cubic-bezier(.165, .84, .44,  1);
+  --ease-out-expo:     cubic-bezier(.19,  1,   .22,  1);
+  --ease-in-out-quart: cubic-bezier(.77,  0,   .175, 1);
+  --dur-1: 120ms;
+  --dur-2: 180ms;
+  --dur-3: 240ms;
+  --dur-4: 300ms;
+}
+
+/* ── Scroll-reveal utility ───────────────────────────────────────────────────
+   Add class="reveal" to any section or element.
+   JS adds "is-visible" via IntersectionObserver.
+   prefers-reduced-motion is already handled globally (transition-duration: 0.01ms).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity    var(--dur-3) var(--ease-out-quart),
+    transform  var(--dur-3) var(--ease-out-quart);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children — parent gets .reveal-stagger, each child animates in sequence */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity   var(--dur-3) var(--ease-out-quart),
+    transform var(--dur-3) var(--ease-out-quart);
+}
+.reveal-stagger.is-visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
+.reveal-stagger.is-visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 60ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 120ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 180ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 240ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
+
+/* ── Animation keyframes ──────────────────────────────────────────────────── */
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pain-pulse {
+  0%, 100% { transform: scale(1);   opacity: 0.75; }
+  50%       { transform: scale(2.2); opacity: 0.15; }
+}
+
+/* ── Utility classes ──────────────────────────────────────────────────────── */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-track:hover,
+.marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
+.pain-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pain-pulse 2.4s ease-in-out infinite;
+}
+
+/* ── Mad-Libs contact form inline fields ─────────────────────────────────── */
+
+.ml-field {
+  display: inline;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--plum);
+  border-radius: 0;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--ink);
+  padding: 0.05em 0.25em 0.1em;
+  outline: none;
+  vertical-align: baseline;
+  min-width: 6ch;
+}
+
+.ml-field:focus {
+  border-bottom: 2px solid var(--bloom);
+  box-shadow: 0 2px 0 -1px color-mix(in srgb, var(--bloom) 15%, transparent);
+}
+
+.ml-field[aria-invalid="true"] {
+  border-bottom-color: var(--destructive);
+}
+
+.ml-field::placeholder {
+  color: var(--muted-text);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.ml-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235C2A57' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.3em center;
+  background-size: 0.8em;
+  padding-right: 1.6em;
+  cursor: pointer;
 }
 
 @layer base {
@@ -90,11 +228,10 @@
     @apply border-border;
   }
 
-  /* Visible focus ring for all interactive elements */
+  /* Visible focus ring — bloom-colored, follows element shape */
   :focus-visible {
-    outline: 3px solid var(--ring);
+    outline: 2px solid var(--bloom);
     outline-offset: 3px;
-    border-radius: 3px;
   }
 
   /* Respect prefers-reduced-motion */
@@ -115,9 +252,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+    font-family: 'Public Sans', system-ui, sans-serif;
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -128,9 +265,9 @@
   h5,
   h6 {
     font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
-    line-height: 1.2;
+    line-height: 1.15;
     font-weight: 600;
-    color: var(--foreground);
+    color: var(--ink);
   }
 
   /* Screen-reader only utility */

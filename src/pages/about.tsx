@@ -1,6 +1,87 @@
+import { useState } from "react";
 import { Link } from "react-router";
 import { PageMeta } from "@/components/page-meta";
 import { JsonLd } from "@/components/json-ld";
+import { useRevealAll } from "@/hooks/use-reveal-all";
+
+// ── Ask AI widget ─────────────────────────────────────────────────────────────
+
+const LLMS_URL = "https://pratik-aggarwal-website.vercel.app/llms.txt";
+const DEFAULT_Q = "Tell me about Pratik Aggarwal and his work";
+
+function AskAI() {
+  const [question, setQuestion] = useState("");
+
+  const buildUrl = (base: string) => {
+    const q = question.trim() || DEFAULT_Q;
+    const prompt = `${q}. Use this document for context: ${LLMS_URL}`;
+    return `${base}?q=${encodeURIComponent(prompt)}`;
+  };
+
+  return (
+    <div className="mt-7" style={{ maxWidth: "52ch" }}>
+      <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "var(--muted-text)" }}>
+        Ask an AI about Pratik
+      </p>
+      <div
+        className="flex items-center rounded-xl border border-border bg-card overflow-hidden"
+        style={{ boxShadow: "0 1px 3px rgba(30,26,36,0.06)" }}
+      >
+        <label htmlFor="ask-ai-question" className="sr-only">
+          Your question about Pratik
+        </label>
+        <input
+          id="ask-ai-question"
+          type="text"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          placeholder="What does Pratik work on?"
+          className="flex-1 bg-transparent px-4 py-3 text-sm outline-none"
+          style={{
+            color: "var(--ink)",
+            fontFamily: "'Public Sans', system-ui, sans-serif",
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && question.trim()) {
+              window.open(buildUrl("https://claude.ai/new"), "_blank", "noopener,noreferrer");
+            }
+          }}
+        />
+      </div>
+      <div className="flex flex-wrap gap-2.5 mt-2.5">
+        <a
+          href={buildUrl("https://claude.ai/new")}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setQuestion("")}
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+          style={{
+            backgroundColor: "var(--plum)",
+            color: "#ffffff",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#4A2246")}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "var(--plum)")}
+        >
+          Ask Claude →
+          <span className="sr-only">(opens in new tab)</span>
+        </a>
+        <a
+          href={buildUrl("https://chat.openai.com")}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setQuestion("")}
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-border text-xs font-semibold transition-colors hover:border-primary/50"
+          style={{ color: "var(--ink)" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--plum)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink)")}
+        >
+          Ask ChatGPT →
+          <span className="sr-only">(opens in new tab)</span>
+        </a>
+      </div>
+    </div>
+  );
+}
 
 // ── Reusable pull-quote ───────────────────────────────────────────────────────
 
@@ -11,10 +92,10 @@ function PullQuote({
   children: React.ReactNode;
   accent?: "teal" | "plum";
 }) {
-  const color = accent === "teal" ? "#1B6B6B" : "#6E4C7E";
+  const color = accent === "teal" ? "var(--sage)" : "var(--plum)";
   return (
     <blockquote
-      className="my-14 pl-7 border-l-4"
+      className="reveal my-14 pl-7 border-l-4"
       style={{ borderColor: color }}
     >
       <p
@@ -52,13 +133,13 @@ function Portrait({
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(140deg, #EDE8E0 0%, #D6CEBC 55%, #C8BAA4 100%)",
+              "linear-gradient(140deg, #EDE9EF 0%, #D8D0DC 55%, #C8BDD2 100%)",
           }}
           aria-hidden="true"
         />
         <span
           className="absolute inset-0 flex items-center justify-center text-sm italic px-6 text-center"
-          style={{ color: "rgba(27,58,91,0.25)" }}
+          style={{ color: "rgba(30,26,36,0.2)" }}
           aria-hidden="true"
         >
           [{alt}]
@@ -74,6 +155,7 @@ function Portrait({
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function About() {
+  useRevealAll();
   return (
     <article aria-labelledby="about-heading">
       <PageMeta
@@ -87,16 +169,16 @@ export default function About() {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pratikaggarwal.in" },
-            { "@type": "ListItem", "position": 2, "name": "About", "item": "https://pratikaggarwal.in/about" }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pratik-aggarwal-website.vercel.app" },
+            { "@type": "ListItem", "position": 2, "name": "About", "item": "https://pratik-aggarwal-website.vercel.app/about" }
           ]
         },
         {
           "@context": "https://schema.org",
           "@type": "Person",
-          "@id": "https://pratikaggarwal.in/#pratik-aggarwal",
+          "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal",
           "name": "Pratik Aggarwal",
-          "url": "https://pratikaggarwal.in/about",
+          "url": "https://pratik-aggarwal-website.vercel.app/about",
           "jobTitle": "Disability Inclusion Expert, Speaker & Director",
           "description": "Pratik Aggarwal is a disability inclusion expert and storyteller based in New Delhi, India. He lives with fibromyalgia — a chronic invisible disability — and has spent over nine years working at the intersection of disability, public policy, community development, and storytelling. He is Director of ASTHA, a non-profit working with children with disabilities in Delhi's urban informal settlements, and founder of Blooming in Pain, a storytelling platform for people living with invisible disabilities.",
           "hasCredential": [
@@ -111,7 +193,7 @@ export default function About() {
           ],
           "worksFor": {
             "@type": "Organization",
-            "@id": "https://pratikaggarwal.in/#astha",
+            "@id": "https://pratik-aggarwal-website.vercel.app/#astha",
             "name": "ASTHA",
             "url": "https://asthaindia.in"
           },
@@ -133,13 +215,13 @@ export default function About() {
         {
           "@context": "https://schema.org",
           "@type": "Organization",
-          "@id": "https://pratikaggarwal.in/#astha",
+          "@id": "https://pratik-aggarwal-website.vercel.app/#astha",
           "name": "ASTHA",
           "url": "https://asthaindia.in",
           "description": "ASTHA is a New Delhi-based non-profit organisation working with children with disabilities in urban informal settlements. Pratik Aggarwal serves as its Director.",
           "areaServed": { "@type": "City", "name": "New Delhi" },
           "founder": { "@type": "Person", "name": "ASTHA founding team" },
-          "employee": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" }
+          "employee": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" }
         }
       ]} />
 
@@ -160,6 +242,8 @@ export default function About() {
             On living with fibromyalgia, the work it led me towards, and the
             platform I built because I couldn't find the stories I needed.
           </p>
+
+          <AskAI />
         </div>
       </header>
 
@@ -309,7 +393,7 @@ export default function About() {
 
           {/* ── 4. Credibility (understated) ──────────────────────────── */}
           <section aria-label="Roles, publications, and affiliations">
-            <div className="border-t border-b border-border py-9 my-12">
+            <div className="reveal border-t border-b border-border py-9 my-12">
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
                 Roles &amp; publications
               </p>
@@ -354,7 +438,7 @@ export default function About() {
 
           {/* ── 5. Soft CTA ───────────────────────────────────────────── */}
           <section aria-label="Read more or work together">
-            <p className="text-lg text-muted-foreground mb-9 max-w-[58ch] leading-relaxed">
+            <p className="reveal text-lg text-muted-foreground mb-9 max-w-[58ch] leading-relaxed">
               If any of this resonates — whether you live with an invisible
               disability, work in inclusion, or simply want to understand the
               experience better — there's a place for you here.
@@ -363,7 +447,7 @@ export default function About() {
               <Link
                 to="/blooming-in-pain"
                 className="inline-flex items-center px-7 py-3.5 rounded-md font-semibold text-base text-white hover:opacity-90 transition-opacity"
-                style={{ backgroundColor: "#6E4C7E" }}
+                style={{ backgroundColor: "var(--plum)" }}
               >
                 Read more stories
               </Link>

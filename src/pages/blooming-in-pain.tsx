@@ -78,8 +78,8 @@ const stories = [
 ];
 
 const cardGradient = {
-  sand: "linear-gradient(145deg, #EDE8E0 0%, #D8CEBC 100%)",
-  plum: "linear-gradient(145deg, #EAE4F0 0%, #D4C8E4 100%)",
+  sand: "linear-gradient(145deg, #EDE9EF 0%, #D8D0DC 100%)",
+  plum: "linear-gradient(145deg, #EAE2F0 0%, #D4C6E4 100%)",
 };
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -98,21 +98,21 @@ export default function BloomingInPain() {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pratikaggarwal.in" },
-            { "@type": "ListItem", "position": 2, "name": "Blooming in Pain", "item": "https://pratikaggarwal.in/blooming-in-pain" }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pratik-aggarwal-website.vercel.app" },
+            { "@type": "ListItem", "position": 2, "name": "Blooming in Pain", "item": "https://pratik-aggarwal-website.vercel.app/blooming-in-pain" }
           ]
         },
         {
           "@context": "https://schema.org",
           "@type": "Organization",
-          "@id": "https://pratikaggarwal.in/#blooming-in-pain",
+          "@id": "https://pratik-aggarwal-website.vercel.app/#blooming-in-pain",
           "name": "Blooming in Pain",
-          "url": "https://pratikaggarwal.in/blooming-in-pain",
+          "url": "https://pratik-aggarwal-website.vercel.app/blooming-in-pain",
           "sameAs": [
             "https://medium.com/@BloomingInPain",
             "https://instagram.com/blooming.in.pain"
           ],
-          "founder": { "@id": "https://pratikaggarwal.in/#pratik-aggarwal" },
+          "founder": { "@id": "https://pratik-aggarwal-website.vercel.app/#pratik-aggarwal" },
           "description": "Blooming in Pain is a storytelling platform founded by Pratik Aggarwal for people living with invisible disabilities — including fibromyalgia, chronic fatigue syndrome, lupus, anxiety disorders, endometriosis, and other conditions that exist between what bodies hold and what medicine is prepared to name. It publishes honest, first-person accounts of life with invisible illness — without inspiration framing, tragedy arcs, or the requirement to be believed first.",
           "knowsAbout": [
             "Invisible disabilities", "Fibromyalgia", "Chronic fatigue syndrome",
@@ -171,12 +171,12 @@ export default function BloomingInPain() {
       {/* ── Hero / What it is ─────────────────────────────────────────── */}
       <header
         className="px-6 pt-20 pb-20 border-b border-border"
-        style={{ backgroundColor: "#F8F4FB" }}
+        style={{ backgroundColor: "var(--ground)" }}
       >
         <div className="max-w-[70ch] mx-auto">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ color: "#6E4C7E" }}
+            style={{ color: "var(--bloom)" }}
           >
             Initiative by Pratik Aggarwal
           </p>
@@ -189,7 +189,7 @@ export default function BloomingInPain() {
             <em
               style={{
                 fontStyle: "italic",
-                color: "#6E4C7E",
+                color: "var(--plum)",
               }}
             >
               in Pain
@@ -244,7 +244,7 @@ export default function BloomingInPain() {
             <div>
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-3"
-                style={{ color: "#6E4C7E" }}
+                style={{ color: "var(--bloom)" }}
               >
                 Stories
               </p>
@@ -291,7 +291,7 @@ export default function BloomingInPain() {
                     {/* Tag overlaid on image */}
                     <span
                       className="absolute bottom-3 left-4 text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
-                      style={{ backgroundColor: "rgba(255,255,255,0.85)", color: "#6E4C7E" }}
+                      style={{ backgroundColor: "rgba(255,255,255,0.85)", color: "var(--plum)" }}
                     >
                       {story.tag}
                     </span>
@@ -316,7 +316,7 @@ export default function BloomingInPain() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity"
-                        style={{ color: "#6E4C7E" }}
+                        style={{ color: "var(--plum)" }}
                         aria-label={`Read "${story.title}" on Medium (opens in new tab)`}
                       >
                         Read →
@@ -384,12 +384,12 @@ export default function BloomingInPain() {
       <section
         aria-labelledby="share-heading"
         className="px-6 py-20 border-t border-border"
-        style={{ backgroundColor: "#F8F4FB" }}
+        style={{ backgroundColor: "var(--surface)" }}
       >
         <div className="max-w-[65ch] mx-auto text-center">
           <p
             className="text-xs font-semibold uppercase tracking-widest mb-5"
-            style={{ color: "#6E4C7E" }}
+            style={{ color: "var(--bloom)" }}
           >
             Contribute
           </p>
@@ -412,7 +412,7 @@ export default function BloomingInPain() {
           <Link
             to="/blooming-in-pain/submit"
             className="inline-flex items-center px-8 py-3.5 rounded-md font-semibold text-base text-white hover:opacity-90 transition-opacity"
-            style={{ backgroundColor: "#6E4C7E" }}
+            style={{ backgroundColor: "var(--plum)" }}
           >
             Share your story
           </Link>
@@ -449,7 +449,7 @@ export default function BloomingInPain() {
             >
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-4"
-                style={{ color: "#6E4C7E" }}
+                style={{ color: "var(--bloom)" }}
               >
                 Instagram
               </p>
@@ -465,7 +465,7 @@ export default function BloomingInPain() {
               </p>
               <span
                 className="inline-flex items-center text-sm font-semibold underline underline-offset-4"
-                style={{ color: "#6E4C7E" }}
+                style={{ color: "var(--plum)" }}
               >
                 Follow on Instagram →
                 <span className="sr-only">(opens in new tab)</span>
@@ -483,7 +483,7 @@ export default function BloomingInPain() {
             >
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-4"
-                style={{ color: "#6E4C7E" }}
+                style={{ color: "var(--bloom)" }}
               >
                 Medium
               </p>
@@ -499,7 +499,7 @@ export default function BloomingInPain() {
               </p>
               <span
                 className="inline-flex items-center text-sm font-semibold underline underline-offset-4"
-                style={{ color: "#6E4C7E" }}
+                style={{ color: "var(--plum)" }}
               >
                 Read on Medium →
                 <span className="sr-only">(opens in new tab)</span>
@@ -517,7 +517,7 @@ export default function BloomingInPain() {
               <Link
                 to="/contact"
                 className="font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity"
-                style={{ color: "#6E4C7E" }}
+                style={{ color: "var(--plum)" }}
               >
                 Subscribe here.
               </Link>
